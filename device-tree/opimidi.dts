@@ -1,0 +1,94 @@
+/dts-v1/;
+/plugin/;
+/ {
+	compatible = "xunlong,orangepi-zero", "allwinner,sun8i-h2plus", "allwinner,sun8i-h3";
+
+        /*
+         * Disable uneeded hardware
+         */
+	fragment0 {
+                // UART2, pins are used for gpio-keys
+		target = <&uart2>;
+		__overlay__ {
+		    status = "disabled";
+		};
+	};
+	fragment1 {
+		target = <&xr819wifi>;
+		__overlay__ {
+		    status = "disabled";
+		};
+	};
+
+
+        /*
+         * Enable and configure opimidi hardware
+         */
+        fragment100 {
+                // i2c-0, with the LCD GPIO
+		target = <&i2c0>;
+		__overlay__ {
+                    status = "okay";
+                    #address-cells = <1>;
+                    #size-cells = <0>;
+                    lcd_gpios: pcf8574@3f {
+                        compatible = "nxp,pcf8574";
+                        reg = <0x3f>;
+                        gpio-controller;
+                        #gpio-cells = <2>;
+                        ngpios = <8>;
+                        gpio-line-names = "RS", "RW", "E", "BL", "D5", "D6", "D7", "D8";
+                    };
+                };
+        };
+
+        fragment110 {
+                // i2c-1, with the ADC
+		target = <&i2c1>;
+		__overlay__ {
+                    status = "okay";
+                    #address-cells = <1>;
+                    #size-cells = <0>;
+                    pcf8591@48 {
+                        compatible = "pcf8591";
+                        reg = <0x48>;
+                    };
+                };
+        };
+
+	fragment120 {
+		target-path = "/";
+		__overlay__ {
+                    // The buttons on PA00-PA02
+		    opimidi-keys {
+			compatible = "gpio-keys";
+                        button0 {
+                           label = "BTN0";
+                           linux,code = <0x100>;
+                           gpios = <&pio 0 0 1>;
+                        };
+                        button1 {
+                           label = "BTN1";
+                           linux,code = <0x101>;
+                           gpios = <&pio 0 1 1>;
+                        };
+                        button2 {
+                           label = "BTN2";
+                           linux,code = <0x102>;
+                           gpios = <&pio 0 2 1>;
+                        };
+		    };
+                    // The LCD backlight
+                    opimidi-lcd-leds {
+                        compatible = "gpio-leds";
+                        backlight {
+                            gpios = <&lcd_gpios 3 0>;
+                            default-state = "off";
+                        };
+                    };
+		};
+	};
+};
+
+
+// vi: sw=4 sts=4 et

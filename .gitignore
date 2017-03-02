@@ -1,0 +1,5 @@
+*~
+/build
+*.dtbo
+*.log
+__pycache__
