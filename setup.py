@@ -11,6 +11,7 @@ setup(
             'opimidi = opimidi.main:main',
         ],
     },
+    install_requires=["evdev>=0.6.4"],
 
     author="Jacek Konieczny",
     author_email="jajcus@jajcus.net",
