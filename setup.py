@@ -10,6 +10,8 @@ setup(
         'console_scripts': [
             'opimidi = opimidi.main:main',
             'opimidi_set_permissions = opimidi.tools:opimidi_set_permissions',
+            'opimidi_start_usb = opimidi.usb:opimidi_start_usb',
+            'opimidi_stop_usb = opimidi.usb:opimidi_stop_usb',
         ],
     },
     install_requires=["evdev>=0.6.4"],

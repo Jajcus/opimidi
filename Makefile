@@ -15,9 +15,11 @@ install: device-tree/opimidi.dtbo
 	install -m 644 device-tree/opimidi.dtbo /boot/dtb/overlay/opimidi.dtbo
 	install -m 644 device-tree/opimidi-tinyrtc.dtbo /boot/dtb/overlay/opimidi-tinyrtc.dtbo
 	ln -sf /boot/dtb/overlay/opimidi-tinyrtc.dtbo /lib/firmware/opimidi-tinyrtc.dtbo
-	install -m 644 systemd/hwclock.service /etc/systemd/system/hwclock.service
 	install -m 644 systemd/10-opimidi.rules /etc/udev/rules.d/10-opimidi.rules
+	install -m 644 systemd/hwclock.service /etc/systemd/system/hwclock.service
 	systemctl enable hwclock.service
+	install -m 644 systemd/opimidi_usb.service /etc/systemd/system/opimidi_usb.service
+	systemctl enable opimidi_usb.service
 	$(PYTHON) setup.py install --skip-build
 
 .PHONY: apply-dt apply-dt-rtc

@@ -1,0 +1,12 @@
+[Unit]
+Description=Opimidi USB gadget
+
+[Service]
+ExecStart=-/sbin/modprobe libcomposite
+ExecStart=/usr/local/bin/opimidi_start_usb
+ExecStop=/usr/local/bin/opimidi_stop_usb
+Type=oneshot
+RemainAfterExit=true
+
+[Install]
+WantedBy=multi-user.target
