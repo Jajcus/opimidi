@@ -17,7 +17,7 @@ setup(
     author="Jacek Konieczny",
     author_email="jajcus@jajcus.net",
     description="Orange Pi-based MIDI controller",
-    license="GPLv2+",
+    license="BSD",
     keywords="orangepi midi",
     url="https://github.com/jajcus/opimidi/",
 )
