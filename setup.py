@@ -9,6 +9,7 @@ setup(
     entry_points={
         'console_scripts': [
             'opimidi = opimidi.main:main',
+            'opimidi_set_permissions = opimidi.tools:opimidi_set_permissions',
         ],
     },
     install_requires=["evdev>=0.6.4"],

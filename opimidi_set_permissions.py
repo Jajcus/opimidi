@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 
-from opimidi.lcd import LCD
+from opimidi.tools import opimidi_set_permissions
 
-lcd = LCD()
-lcd.set_permissions("root", "opimidi")
+opimidi_set_permissions()

@@ -1,5 +1,7 @@
 *~
 /build
+/dist
+*.egg-info
 *.dtbo
 *.log
 __pycache__

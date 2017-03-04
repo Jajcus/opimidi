@@ -1,0 +1,3 @@
+
+class HardwareInitError(Exception):
+    pass

@@ -1,9 +1,7 @@
 
 import glob
-import grp
 import logging
 import os
-import pwd
 import time
 
 logger = logging.getLogger("lcd")
@@ -140,16 +138,8 @@ class LCD:
         self._set_bit("RS", 0)
         time.sleep(0.0002)
 
-    def set_permissions(self, uid, gid):
-        if isinstance(uid, str):
-            uid = pwd.getpwnam(uid).pw_uid
-        if isinstance(gid, str):
-            gid = grp.getgrnam(gid).gr_gid
-        for path in self._gpio_v_files.values():
-            os.chown(path, uid, gid)
-            os.chmod(path, 0o664)
-        os.chown(self._backlight_v_fn, uid, gid)
-        os.chmod(self._backlight_v_fn, 0o664)
+    def get_write_files(self):
+        return list(self._gpio_v_files.values()) + [self._backlight_v_fn]
 
     def write_bytes(self, string):
         if not isinstance(string, bytes):
