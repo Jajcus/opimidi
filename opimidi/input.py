@@ -20,7 +20,7 @@ HWMON_DEVICES = {
 PEDALS_DEVICE_NAME = "pcf8591"
 PEDALS_INPUTS = ["in0", "in1"]
 PEDALS_POLL_INTERVAL = 0.01
-PEDALS_SENSITIVITY = 2
+PEDALS_SENSITIVITY = 4
 
 class EvdevInput:
     def __init__(self, device_name):
@@ -49,6 +49,9 @@ class HwmonInput:
     def __init__(self, device_name, input_names):
         self.inputs = []
         self.values = []
+        self.rel_values = []
+        self.min = []
+        self.max = []
         self._find_device(device_name, input_names)
 
     def _find_device(self, device_name, input_names):
@@ -71,29 +74,54 @@ class HwmonInput:
                     value = int(input_f.read().strip())
             except (IOError, ValueError) as err:
                 raise HardwareInitError("Cannot read input {!r} on device {!r}: {}"
-                                        .format(input_name, device_name, err))
+                        .format(input_name, device_name, err))
             self.inputs.append(input_path)
-            self.values.append(value)
+            self.values.append(value // 10)
+            self.rel_values.append(0.5)
+        self.min = list(self.values)
+        self.max = list(self.values)
 
     def get_write_files(self):
         return []
 
     def read_inputs(self):
-        changed = False
+        changed = []
         for i, path in enumerate(self.inputs):
             with open(path, "rt") as input_f:
                 raw_value = int(input_f.read().strip())
-            value = float(raw_value) / 10
-            if abs(value - self.values[i]) > PEDALS_SENSITIVITY:
-                self.values[i] = value
-                changed = True
+            last_value = self.values[i]
+            value = raw_value // 10
+            if value == last_value:
+                continue
+            max_v = self.max[i]
+            min_v = self.min[i]
+            if value > max_v:
+                logger.debug("%r > %r, recalibrating", value, max_v)
+                max_v = value
+                self.max[i] = max_v
+            elif value < min_v:
+                logger.debug("%r < %r, recalibrating", value, min_v)
+                min_v = value
+                self.min[i] = min_v
+            elif abs(value - self.values[i]) < PEDALS_SENSITIVITY:
+                # ignore small changes
+                continue
+            elif  value < min_v + PEDALS_SENSITIVITY:
+                value = min_v
+            elif value > max_v - PEDALS_SENSITIVITY:
+                value = max_v
+            self.values[i] = value
+            self.rel_values[i] = float(value - min_v) / (max_v - min_v)
+            changed.append(i)
         return changed
 
     async def print_events(self):
         while True:
             await asyncio.sleep(PEDALS_POLL_INTERVAL)
             if self.read_inputs():
-                print(*self.values)
+                print(*("{:3d}".format(v) for v in self.values),
+                      *("{:5.2f}".format(v) for v in self.rel_values),
+                      sep="\t")
 
 def make_devices():
     result = []
