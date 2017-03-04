@@ -4,8 +4,10 @@ import evdev
 import glob
 import logging
 import os
+import time
 
 from .exceptions import HardwareInitError
+from .util import run_async_jobs
 
 logger = logging.getLogger("input")
 
@@ -22,9 +24,24 @@ PEDALS_INPUTS = ["in0", "in1"]
 PEDALS_POLL_INTERVAL = 0.01
 PEDALS_SENSITIVITY = 4
 
+class EventHandler:
+    def handle_event(self, timestamp, e_type, e_code, value, timedelta):
+        """Process incoming event.
+
+        Parameters:
+            - `timestamp`: event timestamp
+            - `e_type`: event type (EV_KEY, EV_ABS)
+            - `e_code`: key/axis code
+            - `value`: 0.0 - Off, 1.0 – On or continuous value
+            - `timedelta`: how long was the key pressed/depressed
+        """
+        raise NotImplementedError
+
 class EvdevInput:
     def __init__(self, device_name):
         self.dev = None
+        self.key_state = {}
+        self.key_ts = {}
         self._find_device(device_name)
 
     def _find_device(self, device_name):
@@ -41,9 +58,31 @@ class EvdevInput:
     def get_write_files(self):
         return [self.dev.fn]
 
-    async def print_events(self):
+    async def collect_events(self, handler):
         async for event in self.dev.async_read_loop():
-            print(evdev.categorize(event), sep=': ')
+            if event.type == evdev.ecodes.EV_SYN:
+                continue
+            elif event.type == evdev.ecodes.EV_KEY:
+                key_event = evdev.events.KeyEvent(event)
+                if key_event.keystate not in (0, 1):
+                    continue
+                key_code = event.code
+                state = bool(key_event.keystate)
+                last_state = self.key_state.get(key_code, False)
+                if state == last_state:
+                    continue
+                timestamp = event.timestamp()
+                last_ts = self.key_ts.get(key_code)
+                if last_ts:
+                    time_delta = timestamp - last_ts
+                else:
+                    time_delta = 0
+                self.key_state[key_code] = state
+                handler.handle_event(timestamp, event.type, key_code,
+                                     float(state), time_delta)
+            else:
+                logger.debug("Ignoring unknown event: %s",
+                             evdev.util.categorize(event))
 
 class HwmonInput:
     def __init__(self, device_name, input_names):
@@ -115,13 +154,27 @@ class HwmonInput:
             changed.append(i)
         return changed
 
-    async def print_events(self):
+    async def collect_events(self, handler):
         while True:
             await asyncio.sleep(PEDALS_POLL_INTERVAL)
-            if self.read_inputs():
-                print(*("{:3d}".format(v) for v in self.values),
-                      *("{:5.2f}".format(v) for v in self.rel_values),
-                      sep="\t")
+            timestamp = time.time()
+            for i in self.read_inputs():
+                handler.handle_event(timestamp, evdev.ecodes.EV_ABS, i,
+                                     self.rel_values[i], 0)
+
+class EventPrinter:
+    def handle_event(self, timestamp, e_type, e_code, value, timedelta):
+        """Process incoming event.
+
+        Parameters:
+            - `timestamp`: event timestamp
+            - `e_type`: event type (EV_KEY, EV_ABS)
+            - `e_code`: key/axis code
+            - `value`: 0.0 - Off, 1.0 – On or continuous value
+            - `timedelta`: how long was the key pressed/depressed
+        """
+        print("{:15.2f} {} {} {:5.2f} {:5.2f}"
+                .format(timestamp, e_type, e_code, value, timedelta))
 
 def make_devices():
     result = []
@@ -149,7 +202,8 @@ def get_write_files():
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)
+    printer = EventPrinter()
+    jobs = []
     for device in make_devices():
-        asyncio.ensure_future(device.print_events())
-    loop = asyncio.get_event_loop()
-    loop.run_forever()
+        jobs.append(device.collect_events(printer))
+    run_async_jobs(jobs)
