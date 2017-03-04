@@ -1,0 +1,3 @@
+
+# prefer the i2c RTC module
+SUBSYSTEM=="rtc", SUBSYSTEMS=="i2c", SYMLINK+="rtc", OPTIONS+="link_priority=10", TAG+="systemd", ENV{SYSTEMD_ALIAS}="/dev/rtc"

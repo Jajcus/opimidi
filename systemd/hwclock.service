@@ -1,0 +1,16 @@
+[Unit]
+Description=Restore / save the current clock
+DefaultDependencies=no
+Before=sysinit.target fake-hwclock.target
+Conflicts=shutdown.target
+Wants=dev-rtc.device
+After=dev-rtc.device
+
+[Service]
+ExecStart=/sbin/hwclock --hctosys -f /dev/rtc
+ExecStop=/sbin/hwclock --systohc -f /dev/rtc
+Type=oneshot
+RemainAfterExit=yes
+
+[Install]
+WantedBy=sysinit.target
