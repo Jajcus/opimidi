@@ -6,6 +6,8 @@ import logging
 import os
 import time
 
+from collections import namedtuple
+
 from .exceptions import HardwareInitError
 from .util import run_async_jobs
 
@@ -24,16 +26,12 @@ PEDALS_INPUTS = ["in0", "in1"]
 PEDALS_POLL_INTERVAL = 0.01
 PEDALS_SENSITIVITY = 4
 
-class EventHandler:
-    def handle_event(self, timestamp, e_type, e_code, value, timedelta):
-        """Process incoming event.
+InputEvent = namedtuple("InputEvent", "timestamp type code value timedelta")
 
-        Parameters:
-            - `timestamp`: event timestamp
-            - `e_type`: event type (EV_KEY, EV_ABS)
-            - `e_code`: key/axis code
-            - `value`: 0.0 - Off, 1.0 – On or continuous value
-            - `timedelta`: how long was the key pressed/depressed
+class EventHandler:
+    def handle_event(self, event):
+        """Process incoming event.
+        `event`: an InputEvent tuple
         """
         raise NotImplementedError
 
@@ -78,8 +76,11 @@ class EvdevInput:
                 else:
                     time_delta = 0
                 self.key_state[key_code] = state
-                handler.handle_event(timestamp, event.type, key_code,
-                                     float(state), time_delta)
+                self.key_ts[key_code] = timestamp
+                ievent = InputEvent(timestamp, event.type, key_code,
+                                    float(state), time_delta)
+                handler.handle_event(ievent)
+                        
             else:
                 logger.debug("Ignoring unknown event: %s",
                              evdev.util.categorize(event))
@@ -159,22 +160,17 @@ class HwmonInput:
             await asyncio.sleep(PEDALS_POLL_INTERVAL)
             timestamp = time.time()
             for i in self.read_inputs():
-                handler.handle_event(timestamp, evdev.ecodes.EV_ABS, i,
-                                     self.rel_values[i], 0)
+                ievent = InputEvent(timestamp, evdev.ecodes.EV_ABS, i,
+                                    self.rel_values[i], 0)
+                handler.handle_event(ievent)
 
 class EventPrinter:
-    def handle_event(self, timestamp, e_type, e_code, value, timedelta):
+    def handle_event(self, event):
         """Process incoming event.
-
-        Parameters:
-            - `timestamp`: event timestamp
-            - `e_type`: event type (EV_KEY, EV_ABS)
-            - `e_code`: key/axis code
-            - `value`: 0.0 - Off, 1.0 – On or continuous value
-            - `timedelta`: how long was the key pressed/depressed
         """
         print("{:15.2f} {} {} {:5.2f} {:5.2f}"
-                .format(timestamp, e_type, e_code, value, timedelta))
+                .format(event.timestamp, event.type, event.code,
+                        event.value, event.timedelta))
 
 def make_devices():
     result = []

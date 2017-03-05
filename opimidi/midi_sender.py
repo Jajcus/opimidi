@@ -49,14 +49,13 @@ class MIDISender(EventHandler):
                 break
         else:
             raise RuntimeError("Could not find MIDI port %r", MIDI_PORT)
-    def handle_event(self, timestamp, e_type, e_code, value, timedelta):
-        logger.debug("incoming event: %r",
-                     (timestamp, e_type, e_code, value, timedelta))
-        midi_event = EVENT_MAP.get((e_type, e_code))
+    def handle_event(self, event):
+        logger.debug("incoming event: %r", event)
+        midi_event = EVENT_MAP.get((event.type, event.code))
         if not midi_event:
             logger.debug("  no MIDI event for that")
             return
-        message = midi_event.message(value)
+        message = midi_event.message(event.value)
         logger.debug("  sending message: %r", message)
         self.midi_port.send_message(message)
 
