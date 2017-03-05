@@ -49,6 +49,8 @@ class LCD:
         self._backlight_v_fn = os.path.join(BACKLIGHT_LED, "brightness")
         self._find_gpio()
         self._init()
+        self.lines = 2
+        self.width = 16
 
     def _find_gpio(self):
         for gpiochip_path in glob.glob("/sys/class/gpio/gpiochip*"):
