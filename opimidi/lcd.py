@@ -105,9 +105,14 @@ class LCD:
         self._write_cmd(CLEAR_DISPLAY_CMD)
 
     def _set_bit(self, name, value):
-        with open(self._gpio_v_files[name], "wt") as bit_f:
-            #logger.debug("      %2s: %s", name, value)
-            print(value, file=bit_f)
+        fd = os.open(self._gpio_v_files[name], os.O_WRONLY)
+        try:
+            if value:
+                os.write(fd, b"1")
+            else:
+                os.write(fd, b"0")
+        finally:
+            os.close(fd)
 
     def _write_4bits(self, value):
         self._set_bit("E", 0)
@@ -119,26 +124,25 @@ class LCD:
         self._set_bit("DB6", value & 0x01)
         value >>= 1
         self._set_bit("DB7", value & 0x01)
-        time.sleep(0.0005)
         self._set_bit("E", 1)
-        time.sleep(0.0005)
+        # lets hope i2c speed is not too fast
         self._set_bit("E", 0)
 
     def _write_cmd(self, cmd):
         logger.debug("    CMD:  0x%02x", cmd)
         self._write_4bits((cmd >> 4) & 0x0f)
-        time.sleep(0.0002)
+        time.sleep(0.00005)
         self._write_4bits(cmd & 0x0f)
-        time.sleep(0.0002)
+        time.sleep(0.00005)
 
     def _write_byte(self, data):
         logger.debug("    data: 0x%02x", data)
         self._set_bit("RS", 1)
         self._write_4bits((data >> 4) & 0x0f)
-        time.sleep(0.0002)
+        time.sleep(0.00005)
         self._write_4bits(data & 0x0f)
         self._set_bit("RS", 0)
-        time.sleep(0.0002)
+        time.sleep(0.00005)
 
     def get_write_files(self):
         return list(self._gpio_v_files.values()) + [self._backlight_v_fn]
