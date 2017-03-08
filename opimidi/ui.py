@@ -1,6 +1,9 @@
 
 import asyncio
 import logging
+import glob
+import re
+import subprocess
 import time
 
 from concurrent.futures import CancelledError
@@ -14,13 +17,16 @@ from .lcd import LCD
 BANNER = "*** OPIMIDI ***"
 
 KEYS = {
-        ecodes.BTN_1: "A",
+        ecodes.BTN_0: "A",
+        ecodes.BTN_1: "B",
         ecodes.BTN_2: "MODE",
-        ecodes.BTN_3: "B",
         }
 
 QUEUE_SIZE = 10
-HOLD_TIME = 2
+HOLD_TIME = 1
+
+IP_CMD = ["/sbin/ip", "-o", "-4", "addr", "show", "dev", "eth0"]
+IP_RE = re.compile(r"inet\s+([\d.]+)")
 
 logger = logging.getLogger("ui")
 
@@ -62,10 +68,153 @@ class StandByMode(UIMode):
     async def run(self):
         while True:
             i_type, key_name = await self.ui.input(10)
+            logger.debug("%s: %s", i_type, key_name)
             if i_type == "press":
                 # any key press
                 return DefaultMode(self.ui)
             self.ui.write_centered(1, time.ctime())
+
+class MenuMode(UIMode):
+    menu_entries = [
+            "???",
+            ]
+    menu_line = 1
+    def __init__(self, ui):
+        super().__init__(ui)
+        self.current = 0
+
+    def enter(self):
+        self.ui.write_centered(0, BANNER)
+        self.update_menu()
+
+    def update_menu(self):
+        entry = self.menu_entries[self.current]
+        logger.debug("Selected: %r", entry)
+        self.ui.write_three(self.menu_line, "<-", entry, "->")
+        select_method = "select_" + entry.lower().replace(" ", "_")
+        if hasattr(self, select_method):
+            getattr(self, select_method)()
+        else:
+            logger.debug("No such method: %r", select_method)
+
+    def activate(self, entry):
+        logger.debug("Entering: %r", entry)
+        activate_method = "activate_" + entry.lower().replace(" ", "_")
+        method = getattr(self, activate_method, None)
+        if method:
+            return method()
+        else:
+            logger.debug("No such method: %r", activate_method)
+        return None
+
+    def leave(self):
+        pass
+
+    async def run(self):
+        while True:
+            i_type, key_name = await self.ui.input()
+            logger.debug("%s: %s", i_type, key_name)
+            if i_type == "hold" and key_name == "MODE":
+                return DefaultMode(self.ui)
+            if i_type != "press":
+                continue
+            if key_name == "A":
+                change = -1
+            elif key_name == "B":
+                change = 1
+            elif key_name == "MODE":
+                entry = self.menu_entries[self.current]
+                new_mode = self.activate(entry)
+                if new_mode is not None:
+                    return new_mode
+            else:
+                continue
+            self.current = (self.current + change) % len(self.menu_entries)
+            self.update_menu()
+
+class SetupMode(MenuMode):
+    menu_entries = [
+            "Info",
+            "Standby",
+            ]
+    def activate_info(self):
+        return InfoMode(self.ui)
+    def activate_standby(self):
+        return StandByMode(self.ui)
+
+def _get_cpu_temp():
+    with open("/sys/class/thermal/thermal_zone0/temp", "rt") as temp_f:
+        value = temp_f.read().strip()
+    try:
+        temp = round(float(value) / 1000.0)
+    except ValueError as err:
+        raise OSError("Invalid CPU temp value read: " + value.strip())
+    return temp
+
+def _get_case_temp():
+    w1_devs = glob.glob("/sys/bus/w1/devices/28-*/w1_slave")
+    if not w1_devs:
+        raise OSError("No w1 temperature sensor found")
+
+    with open(w1_devs[0], "rt") as temp_f:
+        line1 = temp_f.readline().strip()
+        line2 = temp_f.readline().strip()
+
+    if not line1.endswith("YES"):
+        raise OSError("Bad w1 temperature sensor reading")
+
+    if "t=" not in line2:
+        raise OSError("Bad w1 temperature sensor reading")
+
+    try:
+        temp = round(float(line2.split("t=", 1)[1]) / 1000.0)
+    except ValueError as err:
+        raise OSError("Invalid case temp value read: " + value.strip())
+
+    return temp
+
+class InfoMode(MenuMode):
+    menu_entries = [
+            "IP Address",
+            "Temperature",
+            ]
+    menu_line = 0
+    def enter(self):
+        self.update_menu()
+
+    def select_ip_address(self):
+        try:
+            output = subprocess.check_output(IP_CMD)
+        except (OSError, subprocess.CalledProcessError) as err:
+            logger.error("%s: %s", " ".join(IP_CMD), err)
+            self.ui.write_centered(1, "unknown")
+            return
+        output = output.decode("utf-8", "replace")
+        match = IP_RE.search(output)
+        if not match:
+            logger.debug("could not find IP in: %r", output)
+            self.ui.write_centered(1, "unknown")
+            return
+        self.ui.write_centered(1, match.group(1))
+
+    def select_temperature(self):
+        self.ui.write_centered(1, "...")
+        try:
+            cpu_temp = "{}\xdfC".format(_get_cpu_temp())
+        except OSError as err:
+            logger.warning("Could not read CPU temp: %s", err)
+            cpu_temp = "unkn"
+
+        try:
+            case_temp = "{}\xdfC".format(_get_case_temp())
+        except OSError as err:
+            case_temp = "unkn"
+
+        self.ui.write_centered(1, cpu_temp + " / " + case_temp)
+
+    def activate(self, entry):
+        return SetupMode(self.ui)
+
 
 class DefaultMode(UIMode):
     def enter(self):
@@ -78,8 +227,9 @@ class DefaultMode(UIMode):
     async def run(self):
         while True:
             i_type, key_name = await self.ui.input()
+            logger.debug("%s: %s", i_type, key_name)
             if i_type == "hold" and key_name == "MODE":
-                return StandByMode(self.ui)
+                return SetupMode(self.ui)
 
 class OpimidiUI(EventHandler):
     def __init__(self):
