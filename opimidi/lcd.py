@@ -145,7 +145,7 @@ class LCD:
 
     def write_bytes(self, string):
         if not isinstance(string, bytes):
-            string = string.encode("us-ascii", "replace")
+            string = string.encode("raw_unicode_escape", "replace")
         for byte in string:
             self._write_byte(byte)
 
