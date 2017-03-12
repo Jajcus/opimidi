@@ -11,7 +11,14 @@ logger = logging.getLogger("midi_sender")
 MIDI_PORT = "f_midi:f_midi-0"
 DEFAULT_CHANNEL = 1
 
-class ControlChange:
+class MidiAction:
+    def message(self, value):
+        """Midi message to send on this action.
+        
+        value is current value of the input (0.0 - 1.0)."""
+        raise NotImplementedError
+
+class ControlChange(MidiAction):
     def __init__(self, number, lsb_number=None, channel=DEFAULT_CHANNEL):
         self.number = number & 0x7f
         if lsb_number is not None:
@@ -31,6 +38,33 @@ class ControlChange:
             msb = (midi_val >> 7) & 0x7f
             lsb = midi_val & 0x7f
             return [self.code, self.number, msb, self.lsb_number, lsb]
+
+class BankSelect(ControlChange):
+    def __init__(self, bank_number, channel=DEFAULT_CHANNEL):
+        if bank_number < 1 or bank_number > 16384:
+            raise ValueEror("Invalid bank number")
+        midi_val = bank_number - 1
+        code = 0xb0 | (channel - 1) & 0x0f
+        msb = (midi_val >> 7) & 0x7f
+        lsb = midi_val & 0x7f
+        self._msg = [code, 0x00, msb, 0x20, lsb]
+    def message(self, value):
+        if value > 0.5:
+            return self._msg
+        else:
+            return []
+
+class ProgramChange(MidiAction):
+    def __init__(self, program_number, channel=DEFAULT_CHANNEL):
+        if program_number < 1 or program_number > 128:
+            raise ValueEror("Invalid program number")
+        code = 0xb0 | (channel - 1) & 0x0f
+        self._msg = [code, program_number - 1]
+    def message(self, value):
+        if value > 0.5:
+            return self._msg
+        else:
+            return []
 
 EVENT_MAP = {
         (ecodes.EV_KEY, ecodes.BTN_1): ControlChange(80),
