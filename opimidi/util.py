@@ -9,14 +9,14 @@ def abort():
     for task in asyncio.Task.all_tasks():
         task.cancel()
 
-def signal_handler():
+def signal_handler(loop):
     logger.info("Stopping by a signal")
     abort()
 
 def run_async_jobs(jobs):
     loop = asyncio.get_event_loop()
-    loop.add_signal_handler(signal.SIGINT, signal_handler)
-    loop.add_signal_handler(signal.SIGTERM, signal_handler)
+    loop.add_signal_handler(signal.SIGINT, signal_handler, loop)
+    loop.add_signal_handler(signal.SIGTERM, signal_handler, loop)
     try:
         loop.run_until_complete(asyncio.wait(jobs))
     except asyncio.CancelledError:

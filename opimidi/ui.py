@@ -232,7 +232,10 @@ class DefaultMode(UIMode):
                 return SetupMode(self.ui)
 
 class OpimidiUI(EventHandler):
-    def __init__(self):
+    def __init__(self, backend=None):
+        self.backend = backend
+        if backend:
+            backend.ui = self
         self._pressed = {}
         self.lcd = LCD()
         self.lcd.set_display(cursor=False, blink=False)
