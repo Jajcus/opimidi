@@ -49,7 +49,7 @@ def main():
             return
         ui = OpimidiUI(protocol)
         loop.run_until_complete(ui.run())
-        trasport.abort()
+        transport.abort()
     except asyncio.CancelledError:
         loop.run_until_complete(asyncio.wait(asyncio.Task.all_tasks()))
     finally:

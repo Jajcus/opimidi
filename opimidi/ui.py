@@ -4,6 +4,7 @@ import logging
 import glob
 import re
 import subprocess
+import sys
 import time
 
 from concurrent.futures import CancelledError
@@ -13,6 +14,7 @@ from evdev import ecodes
 from .util import run_async_jobs, abort
 from .input import EventHandler, make_devices
 from .lcd import LCD
+from .config import Config
 
 BANNER = "*** OPIMIDI ***"
 
@@ -218,8 +220,8 @@ class InfoMode(MenuMode):
 
 class DefaultMode(UIMode):
     def enter(self):
-        self.ui.write_centered(0, BANNER)
-        self.ui.write_three(1, "<-", "preset", "->")
+        self.ui.write_centered(0, self.ui.bank.name)
+        self.ui.write_three(1, "<", self.ui.program.name, ">")
 
     def leave(self):
         pass
@@ -230,16 +232,78 @@ class DefaultMode(UIMode):
             logger.debug("%s: %s", i_type, key_name)
             if i_type == "hold" and key_name == "MODE":
                 return SetupMode(self.ui)
+            elif i_type != "press":
+                continue
+            if key_name == "MODE":
+                return ProgramMode(self.ui)
+            elif key_name == "A":
+                self.ui.select_program(self.ui.cur_prog_i - 1)
+            elif key_name == "B":
+                self.ui.select_program(self.ui.cur_prog_i + 1)
+            self.ui.write_three(1, "<", self.ui.program.name, ">")
+
+class ProgramMode(UIMode):
+    def enter(self):
+        prog = self.ui.program
+        logger.debug("Program settings: %r", prog.settings)
+        labels = prog.settings.get("labels")
+        if labels:
+            self.ui.write_centered(0, prog.name)
+            self.ui.write_centered(1, labels)
+        else:
+            self.ui.write_centered(0, self.ui.bank.name)
+            self.ui.write_centered(1, prog.name)
+
+    def leave(self):
+        pass
+
+    async def run(self):
+        while True:
+            i_type, key_name = await self.ui.input()
+            logger.debug("%s: %s", i_type, key_name)
+            if i_type == "hold" and key_name == "MODE":
+                return SetupMode(self.ui)
+            elif i_type != "press":
+                continue
+            if key_name == "MODE":
+                return DefaultMode(self.ui)
 
 class OpimidiUI(EventHandler):
     def __init__(self, backend=None):
+        self.cur_bank_i = 0
+        self.cur_prog_i = 0
+        self.banks = []
+        self.bank = None
+        self.program = None
+        self.programs = []
         self.backend = backend
         if backend:
             backend.ui = self
         self._pressed = {}
+        self.config = Config()
         self.lcd = LCD()
         self.lcd.set_display(cursor=False, blink=False)
         self.input_queue = asyncio.Queue(QUEUE_SIZE)
+        banks = self.config.get_banks()
+        logger.debug("Configured banks: %r", banks)
+        self.banks = [b for b in banks if b.programs]
+        if not self.banks:
+            logger.error("No programs found in config file")
+            sys.exit(1)
+        self.select_bank(0, False)
+
+    def select_bank(self, index, in_backend=True):
+        self.cur_bank_i = index % len(self.banks)
+        self.bank = self.banks[self.cur_bank_i]
+        self.programs = list(self.bank.programs.values())
+        logger.debug("Selected bank #%i. Programs: %r",
+                     self.cur_bank_i,
+                     self.programs)
+        self.select_program(0, in_backend)
+
+    def select_program(self, index, in_backend=True):
+        self.cur_prog_i = index % len(self.programs)
+        self.program = self.programs[self.cur_prog_i]
 
     def write_centered(self, line, text):
         text = text[:self.lcd.width].center(self.lcd.width)
