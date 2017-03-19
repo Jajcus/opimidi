@@ -1,5 +1,8 @@
 import configparser
 from collections import OrderedDict
+import logging
+
+logger = logging.getLogger("config")
 
 class ConfigBank:
     def __init__(self, name, settings=None):
@@ -18,6 +21,15 @@ class ConfigProgram:
             self.settings = settings
         else:
             self.settings = {}
+    def __contains__(self, key):
+        return key in self.settings
+    def __getitem__(self, key):
+        try:
+            return self.settings[key]
+        except configparser.Error as err:
+            logger.error("Config error: [%s:%s] %r: %s",
+                         self.bank.name, self.name, key, err)
+            raise KeyError(key)
 
 class Config:
     def __init__(self):
@@ -41,4 +53,7 @@ class Config:
                     bank.settings = self.config[section]
     def get_banks(self):
         return list(self.banks.values())
+    def get_program(self, bank_name, program_name):
+        bank = self.banks[bank_name]
+        return bank.programs[program_name]
 

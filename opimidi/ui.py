@@ -23,6 +23,7 @@ KEYS = {
         ecodes.BTN_1: "B",
         ecodes.BTN_2: "MODE",
         }
+KEYS_BYNAME = {name: code for code, name in KEYS.items()}
 
 QUEUE_SIZE = 10
 HOLD_TIME = 1
@@ -34,6 +35,7 @@ logger = logging.getLogger("ui")
 
 class UIMode:
     """Implementation of a single UI mode."""
+    keys_wanted = []
     def __init__(self, ui):
         self.ui = ui
 
@@ -56,6 +58,7 @@ class UIMode:
         pass
 
 class StandByMode(UIMode):
+    keys_wanted = ["A", "B", "MODE"]
     def __init__(self, ui):
         super().__init__(ui)
 
@@ -66,6 +69,7 @@ class StandByMode(UIMode):
     
     def leave(self):
         self.ui.lcd.set_backlight(True)
+        self.ui.select_bank(self.ui.cur_bank_i)
 
     async def run(self):
         while True:
@@ -77,6 +81,7 @@ class StandByMode(UIMode):
             self.ui.write_centered(1, time.ctime())
 
 class MenuMode(UIMode):
+    keys_wanted = ["A", "B", "MODE"]
     menu_entries = [
             "???",
             ]
@@ -219,6 +224,7 @@ class InfoMode(MenuMode):
 
 
 class DefaultMode(UIMode):
+    keys_wanted = ["A", "B", "MODE"]
     def enter(self):
         self.ui.write_centered(0, self.ui.bank.name)
         self.ui.write_three(1, "<", self.ui.program.name, ">")
@@ -243,6 +249,7 @@ class DefaultMode(UIMode):
             self.ui.write_three(1, "<", self.ui.program.name, ">")
 
 class ProgramMode(UIMode):
+    keys_wanted = ["MODE"]
     def enter(self):
         prog = self.ui.program
         logger.debug("Program settings: %r", prog.settings)
@@ -304,6 +311,10 @@ class OpimidiUI(EventHandler):
     def select_program(self, index, in_backend=True):
         self.cur_prog_i = index % len(self.programs)
         self.program = self.programs[self.cur_prog_i]
+        if in_backend:
+            self.backend.send_frame([
+                ["set_program", self.bank.name, self.program.name],
+                ])
 
     def write_centered(self, line, text):
         text = text[:self.lcd.width].center(self.lcd.width)
@@ -364,11 +375,18 @@ class OpimidiUI(EventHandler):
             self.input_queue = asyncio.Queue(QUEUE_SIZE)
             asyncio.ensure_future(self.input_queue.put((i_type, key_name)))
 
+    def subscribe_keys(self, keys):
+        events = [(ecodes.EV_KEY, KEYS_BYNAME.get(name)) for name in keys]
+        self.backend.send_frame([
+            ["set_subscribed_events", events],
+            ])
+
     async def run(self):
         mode = StandByMode(self)
         try:
             while mode:
                 logger.debug("Entering %r", mode)
+                self.subscribe_keys(mode.keys_wanted)
                 mode.enter()
                 try:
                     next_mode = await mode.run()

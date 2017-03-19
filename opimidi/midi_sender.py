@@ -3,6 +3,7 @@ from evdev import ecodes
 import rtmidi
 import logging
 
+from .config import Config
 from .input import EventHandler, make_devices
 from .util import run_async_jobs
 
@@ -58,7 +59,7 @@ class ProgramChange(MidiAction):
     def __init__(self, program_number, channel=DEFAULT_CHANNEL):
         if program_number < 1 or program_number > 128:
             raise ValueEror("Invalid program number")
-        code = 0xb0 | (channel - 1) & 0x0f
+        code = 0xc0 | (channel - 1) & 0x0f
         self._msg = [code, program_number - 1]
     def message(self, value):
         if value > 0.5:
@@ -66,15 +67,44 @@ class ProgramChange(MidiAction):
         else:
             return []
 
-EVENT_MAP = {
-        (ecodes.EV_KEY, ecodes.BTN_1): ControlChange(80),
-        (ecodes.EV_KEY, ecodes.BTN_2): ControlChange(81),
-        (ecodes.EV_ABS, 0): ControlChange(4),
-        (ecodes.EV_ABS, 1): ControlChange(1),
+INPUTS = {
+        "button_A": (ecodes.EV_KEY, ecodes.BTN_0),
+        "button_B": (ecodes.EV_KEY, ecodes.BTN_1),
+        "pedal_1": (ecodes.EV_ABS, 0),
+        "pedal_2": (ecodes.EV_ABS, 1),
         }
 
+DEMO_EVENT_MAP = {
+        (ecodes.EV_KEY, ecodes.BTN_1): [ControlChange(80),],
+        (ecodes.EV_KEY, ecodes.BTN_2): [ControlChange(81),],
+        (ecodes.EV_ABS, 0): [ControlChange(4),],
+        (ecodes.EV_ABS, 1): [ControlChange(1),],
+        }
+
+OP_ALLOWED = ["ControlChange", "ProgramChange"]
+OP_NAMESPACE = { k: v for k, v in globals().items() if k in OP_ALLOWED }
+OP_NAMESPACE["__builtins__"] = {}
+
+def eval_ops(string):
+    if "__" in string:
+        logger.error("Expression %r not allowed", string)
+        return []
+    expr = "[" +  string + "]"
+    logger.debug("Evaluating %r in %r", expr, OP_NAMESPACE)
+    try:
+        return eval(expr, OP_NAMESPACE)
+    except Exception as err:
+        logger.error("Invalid expression %r: %s", string, err)
+        return []
+
 class MIDISender(EventHandler):
-    def __init__(self):
+    def __init__(self, config, event_map=None):
+        self.config = config
+        self.leave_ops = []
+        if event_map:
+            self.event_map = event_map
+        else:
+            self.event_map = {}
         self.midiout = rtmidi.MidiOut(rtmidi.API_LINUX_ALSA)
         self.midi_port = None
         for i, name in enumerate(self.midiout.get_ports()):
@@ -83,19 +113,44 @@ class MIDISender(EventHandler):
                 break
         else:
             raise RuntimeError("Could not find MIDI port %r", MIDI_PORT)
+
+    def apply_ops(self, ops, value=1.0):
+        for op in ops:
+            message = op.message(value)
+            logger.debug("  sending message: %r", message)
+            self.midi_port.send_message(message)
+
     def handle_event(self, event):
         logger.debug("incoming event: %r", event)
-        midi_event = EVENT_MAP.get((event.type, event.code))
-        if not midi_event:
-            logger.debug("  no MIDI event for that")
+        ops = self.event_map.get((event.type, event.code))
+        if not ops:
+            logger.debug("  no MIDI operators for that")
             return
-        message = midi_event.message(event.value)
-        logger.debug("  sending message: %r", message)
-        self.midi_port.send_message(message)
+        self.apply_ops(ops, event.value)
+
+    def set_program(self, bank_n, prog_n):
+        logger.debug("Switching to program %s:%s", bank_n, prog_n)
+        program = self.config.get_program(bank_n, prog_n)
+        if "enter" in program:
+            enter_ops = eval_ops(program["enter"])
+            self.apply_ops(enter_ops)
+        if "leave" in program:
+            self.leave_ops = eval_ops(program["leave"])
+        else:
+            self.leave_ops = []
+        self.event_map = {}
+        for key, event in INPUTS.items():
+            try:
+                ops_s = program[key]
+            except KeyError:
+                continue
+            self.event_map[event] = eval_ops(ops_s)
+        logger.debug("Event map: %r", self.event_map)
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)
-    midi_sender = MIDISender()
+    config = Config()
+    midi_sender = MIDISender(config, DEMO_EVENT_MAP)
     jobs = []
     for device in make_devices():
         jobs.append(device.collect_events(midi_sender))

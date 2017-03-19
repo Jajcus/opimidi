@@ -6,27 +6,19 @@ import json
 logger = logging.getLogger("comm")
 
 class CommProtocol(asyncio.Protocol):
-    def __init__(self, loop, connection_list=None):
+    def __init__(self, loop):
         logger.debug('Creating CommProtocol')
         self.loop = loop
         self.transport = None
-        self.connection_list = connection_list
         self._frame_buf = bytes()
 
     def connection_made(self, transport):
         peername = transport.get_extra_info('peername')
         logger.debug('Connection with %s', peername)
         self.transport = transport
-        if self.connection_list is not None:
-            self.connection_list.append(self)
 
     def connection_lost(self, exc):
         logger.debug('Connection lost')
-        if self.connection_list:
-            try:
-                self.connection_list.remove(self)
-            except ValueError:
-                pass
 
     def data_received(self, data):
         message = data.decode()
@@ -36,6 +28,8 @@ class CommProtocol(asyncio.Protocol):
                 head, data = data.split(b"\x00", 1)
                 frame = self._frame_buf + head
                 self._frame_buf = data
+                logger.debug("head: %r data: %r, frame: %r, frame_buf=%r",
+                        head, data, frame, self._frame_buf)
                 decoded = json.loads(frame.decode("utf-8"))
                 self.frame_received(decoded)
             else:
