@@ -1,7 +1,10 @@
+*.dtbo
+*.egg-info
+*.log
+*.pyc
+*.so
 *~
 /build
 /dist
-*.egg-info
-*.dtbo
-*.log
+/scripts/opimidi
 __pycache__
