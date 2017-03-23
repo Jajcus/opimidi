@@ -1,16 +1,16 @@
 
 from evdev import ecodes
-import rtmidi
+
 import logging
 
+from .alsa import seq
 from .config import Config
 from .input import EventHandler, make_devices
 from .util import run_async_jobs
 
 logger = logging.getLogger("midi_sender")
 
-MIDI_PORT = "f_midi:f_midi-0"
-DEFAULT_CHANNEL = 1
+MIDI_DEST = "f_midi"
 
 class MidiAction:
     def message(self, value):
@@ -20,50 +20,36 @@ class MidiAction:
         raise NotImplementedError
 
 class ControlChange(MidiAction):
-    def __init__(self, number, lsb_number=None, channel=DEFAULT_CHANNEL):
-        self.number = number & 0x7f
-        if lsb_number is not None:
-            self.lsb_number = lsb_number & 0x7f
-        else:
-            self.lsb_number = None
-        self.code = 0xb0 | (channel - 1) & 0x0f
+    def __init__(self, number):
+        self.event = seq.SeqControlChangeEvent(param=number)
 
     def message(self, value):
-        if self.lsb_number is None:
-            # one byte precision
-            midi_val = round(value * 127) & 0x7f
-            return [self.code, self.number, midi_val]
-        else:
-            # two bytes precision
-            midi_val = round(value * 16383)
-            msb = (midi_val >> 7) & 0x7f
-            lsb = midi_val & 0x7f
-            return [self.code, self.number, msb, self.lsb_number, lsb]
+        # one byte precision
+        midi_val = round(value * 127) & 0x7f
+        self.event.value = midi_val
+        return [self.event]
 
-class BankSelect(ControlChange):
-    def __init__(self, bank_number, channel=DEFAULT_CHANNEL):
+class BankSelect(MidiAction):
+    def __init__(self, bank_number):
         if bank_number < 1 or bank_number > 16384:
             raise ValueEror("Invalid bank number")
         midi_val = bank_number - 1
-        code = 0xb0 | (channel - 1) & 0x0f
-        msb = (midi_val >> 7) & 0x7f
-        lsb = midi_val & 0x7f
-        self._msg = [code, 0x00, msb, 0x20, lsb]
-    def message(self, value):
+        self.event = seq.SeqControlChange14btEvent(param=0, value=midi_val)
+
+def message(self, value):
         if value > 0.5:
-            return self._msg
+            return [self.event]
         else:
             return []
 
 class ProgramChange(MidiAction):
-    def __init__(self, program_number, channel=DEFAULT_CHANNEL):
+    def __init__(self, program_number):
         if program_number < 1 or program_number > 128:
             raise ValueEror("Invalid program number")
-        code = 0xc0 | (channel - 1) & 0x0f
-        self._msg = [code, program_number - 1]
+        self.event = seq.SeqProgramChangeEvent(value=program_number-1)
     def message(self, value):
         if value > 0.5:
-            return self._msg
+            return [self.event]
         else:
             return []
 
@@ -105,20 +91,26 @@ class MIDISender(EventHandler):
             self.event_map = event_map
         else:
             self.event_map = {}
-        self.midiout = rtmidi.MidiOut(rtmidi.API_LINUX_ALSA)
-        self.midi_port = None
-        for i, name in enumerate(self.midiout.get_ports()):
-            if name == MIDI_PORT or name.split(" ", 1)[0] == MIDI_PORT:
-                self.midi_port = self.midiout.open_port(i)
-                break
-        else:
-            raise RuntimeError("Could not find MIDI port %r", MIDI_PORT)
+        self.seq = seq.SeqClient("opimidi")
+        self.port = self.seq.create_port("out",
+                                         seq.PORT_CAP_READ|seq.PORT_CAP_SUBS_READ,
+                                         seq.PORT_TYPE_MIDI_GENERIC)
+        try:
+            dest_client, dest_port = self.seq.parse_address(MIDI_DEST)
+        except RuntimeError as err:
+            logger.error("could not parse 'aseqdump': %s", err)
+        try:
+            self.seq.connect_to(self.port, dest_client, dest_port)
+        except RuntimeError as err:
+            logger.error("could not connect to %s:%s: %s", dest_addr, dest_port, err)
 
     def apply_ops(self, ops, value=1.0):
         for op in ops:
             message = op.message(value)
             logger.debug("  sending message: %r", message)
-            self.midi_port.send_message(message)
+            for event in message:
+                self.seq.event_output(event, port=self.port)
+            self.seq.drain_output()
 
     def handle_event(self, event):
         logger.debug("incoming event: %r", event)

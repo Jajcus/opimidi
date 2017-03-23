@@ -775,7 +775,7 @@ SeqControlChangeEvent_init(SeqEvent *self, PyObject *args, PyObject *kwds)
                                  &self->ev.data.control.param,
                                  &self->ev.data.control.value,
                                  EVENT_ARGPTRS);
-    if (!res) {
+    if (res) {
         // SeqEvent_init_generic succeeded
         if (self->ev.data.control.channel < 0 || self->ev.data.control.channel > 127) {
             PyErr_SetString(PyExc_ValueError, "'channel' must be 0-127");
@@ -796,8 +796,8 @@ SeqControlChangeEvent_init(SeqEvent *self, PyObject *args, PyObject *kwds)
 static PyMemberDef SeqControlChangeEvent_members[] = {
     {"type", T_UBYTE, offsetof(SeqEvent, ev.type), READONLY, "event type"},
     {"channel", T_UBYTE, offsetof(SeqEvent, ev.data.control.channel), 0, "controller channel"},
-    {"param", T_UBYTE, offsetof(SeqEvent, ev.data.control.param), 0, "controller number"},
-    {"value", T_UBYTE, offsetof(SeqEvent, ev.data.control.value), 0, "controller value"},
+    {"param", T_UINT, offsetof(SeqEvent, ev.data.control.param), 0, "controller number"},
+    {"value", T_INT, offsetof(SeqEvent, ev.data.control.value), 0, "controller value"},
     {NULL}  /* Sentinel */
 };
 
@@ -810,6 +810,100 @@ static PyTypeObject SeqControlChangeEventType = {
     .tp_doc = "ALSA sequencer control change event",
     .tp_members = SeqControlChangeEvent_members,
     .tp_init = (initproc)SeqControlChangeEvent_init,
+    .tp_base = &SeqEventType,
+};
+
+static int
+SeqControlChange14bitEvent_init(SeqEvent *self, PyObject *args, PyObject *kwds)
+{
+    static char *argformat = EVENT_ARGS "|bII" EVENT_OARGS;
+    static char *kwlist[] = {"channel", "param", "value",
+                             EVENT_KWARGS, NULL};
+    int res = SeqEvent_init_generic(self, args, kwds, SND_SEQ_EVENT_CONTROL14,
+                                 argformat, kwlist,
+                                 &self->ev.data.control.channel,
+                                 &self->ev.data.control.param,
+                                 &self->ev.data.control.value,
+                                 EVENT_ARGPTRS);
+    if (res) {
+        // SeqEvent_init_generic succeeded
+        if (self->ev.data.control.channel < 0 || self->ev.data.control.channel > 127) {
+            PyErr_SetString(PyExc_ValueError, "'channel' must be 0-127");
+            return -1;
+        }
+        if (self->ev.data.control.param < 0 || self->ev.data.control.param > 127) {
+            PyErr_SetString(PyExc_ValueError, "'param' must be 0-127");
+            return -1;
+        }
+        if (self->ev.data.control.value < 0 || self->ev.data.control.value > 16383) {
+            PyErr_SetString(PyExc_ValueError, "'value' must be 0-16383");
+            return -1;
+        }
+    }
+    return res;
+}
+
+static PyMemberDef SeqControlChange14bitEvent_members[] = {
+    {"type", T_UBYTE, offsetof(SeqEvent, ev.type), READONLY, "event type"},
+    {"channel", T_UBYTE, offsetof(SeqEvent, ev.data.control.channel), 0, "controller channel"},
+    {"param", T_UINT, offsetof(SeqEvent, ev.data.control.param), 0, "controller number"},
+    {"value", T_INT, offsetof(SeqEvent, ev.data.control.value), 0, "controller value"},
+    {NULL}  /* Sentinel */
+};
+
+static PyTypeObject SeqControlChange14bitEventType = {
+    PyVarObject_HEAD_INIT(NULL, 0)
+
+    .tp_name = "opimidi.alsa._seq.SeqControlChange14bitEvent",
+    .tp_basicsize = sizeof(SeqEvent),
+    .tp_flags = Py_TPFLAGS_DEFAULT,
+    .tp_doc = "ALSA sequencer 14-bit control change event",
+    .tp_members = SeqControlChange14bitEvent_members,
+    .tp_init = (initproc)SeqControlChange14bitEvent_init,
+    .tp_base = &SeqEventType,
+};
+
+static int
+SeqProgramChangeEvent_init(SeqEvent *self, PyObject *args, PyObject *kwds)
+{
+    static char *argformat = EVENT_ARGS "|bI" EVENT_OARGS;
+    static char *kwlist[] = {"channel", "value",
+                             EVENT_KWARGS, NULL};
+    int res = SeqEvent_init_generic(self, args, kwds, SND_SEQ_EVENT_PGMCHANGE,
+                                 argformat, kwlist,
+                                 &self->ev.data.control.channel,
+                                 &self->ev.data.control.value,
+                                 EVENT_ARGPTRS);
+    if (res) {
+        // SeqEvent_init_generic succeeded
+        if (self->ev.data.control.channel < 0 || self->ev.data.control.channel > 127) {
+            PyErr_SetString(PyExc_ValueError, "'channel' must be 0-127");
+            return -1;
+        }
+        if (self->ev.data.control.value < 0 || self->ev.data.control.value > 127) {
+            PyErr_SetString(PyExc_ValueError, "'value' must be 0-127");
+            return -1;
+        }
+    }
+    return res;
+}
+
+static PyMemberDef SeqProgramChangeEvent_members[] = {
+    {"type", T_UBYTE, offsetof(SeqEvent, ev.type), READONLY, "event type"},
+    {"channel", T_UBYTE, offsetof(SeqEvent, ev.data.control.channel), 0, "program channel"},
+    {"value", T_INT, offsetof(SeqEvent, ev.data.control.value), 0, "program number"},
+    {NULL}  /* Sentinel */
+};
+
+static PyTypeObject SeqProgramChangeEventType = {
+    PyVarObject_HEAD_INIT(NULL, 0)
+
+    .tp_name = "opimidi.alsa._seq.SeqProgramChangeEvent",
+    .tp_basicsize = sizeof(SeqEvent),
+    .tp_flags = Py_TPFLAGS_DEFAULT,
+    .tp_doc = "ALSA sequencer program change event",
+    .tp_members = SeqProgramChangeEvent_members,
+    .tp_init = (initproc)SeqProgramChangeEvent_init,
     .tp_base = &SeqEventType,
 };
 
@@ -841,6 +935,10 @@ PyInit__seq(void)
         return NULL;
     if (PyType_Ready(&SeqControlChangeEventType) < 0)
         return NULL;
+    if (PyType_Ready(&SeqControlChange14bitEventType) < 0)
+        return NULL;
+    if (PyType_Ready(&SeqProgramChangeEventType) < 0)
+        return NULL;
 
     m = PyModule_Create(&seqmodule);
     if (m == NULL)
@@ -860,6 +958,10 @@ PyInit__seq(void)
     PyModule_AddObject(m, "SeqNoteOffEvent", (PyObject *)&SeqNoteOffEventType);
     Py_INCREF(&SeqControlChangeEventType);
     PyModule_AddObject(m, "SeqControlChangeEvent", (PyObject *)&SeqControlChangeEventType);
+    Py_INCREF(&SeqControlChange14bitEventType);
+    PyModule_AddObject(m, "SeqControlChange14bitEvent", (PyObject *)&SeqControlChange14bitEventType);
+    Py_INCREF(&SeqProgramChangeEventType);
+    PyModule_AddObject(m, "SeqProgramChangeEvent", (PyObject *)&SeqProgramChangeEventType);
 
     PyModule_AddIntConstant(m, "OPEN_OUTPUT", SND_SEQ_OPEN_OUTPUT);
     PyModule_AddIntConstant(m, "OPEN_INPUT", SND_SEQ_OPEN_INPUT);

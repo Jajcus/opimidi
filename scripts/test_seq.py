@@ -10,15 +10,15 @@ port = client.create_port("port 1", seq.PORT_CAP_READ|seq.PORT_CAP_SUBS_READ, se
 print("Client: {!r} Queue: {!r} Port: {!r}".format(client, queue, port))
 
 try:
-    dump_addr, dump_port = client.parse_address("aseqdump")
+    dump_client, dump_port = client.parse_address("aseqdump")
 except RuntimeError as err:
-    dump_addr, dump_port = (129, 0)
-    print("could not pares 'aseqdump':", err)
+    dump_client, dump_port = (129, 0)
+    print("could not parse 'aseqdump':", err)
 
 try:
-    client.connect_to(port, dump_addr, dump_port)
+    client.connect_to(port, dump_client, dump_port)
 except RuntimeError as err:
-    print("could not connect to {}:{}: {!r}".format(dump_addr, dump_port, err))
+    print("could not connect to {}:{}: {!r}".format(dump_client, dump_port, err))
 
 
 note = seq.SeqNoteOnEvent()
