@@ -7,6 +7,7 @@ typedef struct {
 	PyObject_HEAD
 	snd_seq_t *handle;
 	int client_id;
+        PyObject * event_classes;
 } SeqClient;
 
 typedef struct {
@@ -22,6 +23,21 @@ SeqClient_dealloc(SeqClient* self)
          snd_seq_close(self->handle);
     }
     Py_TYPE(self)->tp_free((PyObject*)self);
+}
+
+static PyObject * SeqError;
+
+static PyObject * set_error(int err) {
+
+    if (err < SND_ERROR_BEGIN) {
+        errno = err;
+        return PyErr_SetFromErrno(PyExc_OSError);
+    }
+    else {
+        PyErr_SetString(SeqError, snd_strerror(err));
+        return NULL;
+    }
+    return NULL;
 }
 
 static PyObject *
@@ -40,7 +56,7 @@ SeqClient_init(SeqClient *self, PyObject *args, PyObject *kwds)
     static char *kwlist[] = {"client_name", "streams", "mode", "sequencer_name", NULL};
     char *client_name = NULL;
     char *sequencer_name = "default";
-    int streams = SND_SEQ_OPEN_DUPLEX, mode = 0;
+    int streams = SND_SEQ_OPEN_DUPLEX, mode = SND_SEQ_NONBLOCK;
 
     if (! PyArg_ParseTupleAndKeywords(args, kwds, "s|iis", kwlist,
                                       &client_name, &streams, &mode,
@@ -53,12 +69,14 @@ SeqClient_init(SeqClient *self, PyObject *args, PyObject *kwds)
     int err;
     err = snd_seq_open(&self->handle, sequencer_name, streams, mode);
     if (err < 0) {
-        PyErr_SetString(PyExc_RuntimeError, snd_strerror(-err));
+        set_error(-err);
         return -1;
     }
 
     snd_seq_set_client_name(self->handle, client_name);
     self->client_id = snd_seq_client_id(self->handle);
+
+    self->event_classes = PyDict_New();
 
     return 0;
 }
@@ -81,8 +99,7 @@ SeqClient_create_port(SeqClient *self, PyObject *args, PyObject *kwds)
 
     int port = snd_seq_create_simple_port(self->handle, name, caps, type);
     if (port < 0) {
-        PyErr_SetString(PyExc_RuntimeError, snd_strerror(-port));
-        return NULL;
+        return set_error(-port);
     }
 
     return PyLong_FromLong(port);
@@ -104,8 +121,7 @@ SeqClient_delete_port(SeqClient *self, PyObject *args, PyObject *kwds)
 
     int err = snd_seq_delete_simple_port(self->handle, port);
     if (err < 0) {
-        PyErr_SetString(PyExc_RuntimeError, snd_strerror(-err));
-        return NULL;
+        return set_error(-err);
     }
 
     Py_INCREF(Py_None);
@@ -135,8 +151,7 @@ SeqClient_create_queue(SeqClient *self, PyObject *args, PyObject *kwds)
     }
 
     if (queue < 0) {
-        PyErr_SetString(PyExc_RuntimeError, snd_strerror(-queue));
-        return NULL;
+        return set_error(-queue);
     }
 
     return PyLong_FromLong(queue);
@@ -158,8 +173,7 @@ SeqClient_delete_queue(SeqClient *self, PyObject *args, PyObject *kwds)
 
     int err = snd_seq_free_queue(self->handle, queue);
     if (err < 0) {
-        PyErr_SetString(PyExc_RuntimeError, snd_strerror(-err));
-        return NULL;
+        return set_error(-err);
     }
 
     Py_INCREF(Py_None);
@@ -190,8 +204,7 @@ SeqClient_set_queue_tempo(SeqClient *self, PyObject *args, PyObject *kwds)
     int err = snd_seq_set_queue_tempo(self->handle, queue, q_tempo);
 
     if (err < 0) {
-        PyErr_SetString(PyExc_RuntimeError, snd_strerror(-err));
-        return NULL;
+        return set_error(-err);
     }
 
     Py_INCREF(Py_None);
@@ -222,8 +235,7 @@ SeqClient_control_queue(SeqClient *self, PyObject *args, PyObject *kwds,
 
     int err = snd_seq_control_queue(self->handle, queue, ev_type, 0, ev);
     if (err < 0) {
-        PyErr_SetString(PyExc_RuntimeError, snd_strerror(-err));
-        return NULL;
+        return set_error(-err);
     }
 
     Py_INCREF(Py_None);
@@ -363,12 +375,10 @@ SeqClient_event_output(SeqClient *self, PyObject *args, PyObject *kwds)
 
     int err = snd_seq_event_output(self->handle, ev_p);
     if (err < 0) {
-        PyErr_SetString(PyExc_RuntimeError, snd_strerror(-err));
-        return NULL;
+        return set_error(-err);
     }
 
-    Py_INCREF(Py_None);
-    return Py_None;
+    return PyLong_FromLong(err);
 }
 
 
@@ -383,8 +393,7 @@ SeqClient_drain_output(SeqClient *self)
     int err = snd_seq_drain_output(self->handle);
 
     if (err < 0) {
-        PyErr_SetString(PyExc_RuntimeError, snd_strerror(-err));
-        return NULL;
+        return set_error(-err);
     }
 
     Py_INCREF(Py_None);
@@ -402,8 +411,7 @@ SeqClient_drop_output(SeqClient *self)
     int err = snd_seq_drop_output(self->handle);
 
     if (err < 0) {
-        PyErr_SetString(PyExc_RuntimeError, snd_strerror(-err));
-        return NULL;
+        return set_error(-err);
     }
 
     Py_INCREF(Py_None);
@@ -427,8 +435,7 @@ SeqClient_connect_to(SeqClient *self, PyObject *args, PyObject *kwds)
     int err = snd_seq_connect_to(self->handle, port, dest_client, dest_port);
 
     if (err < 0) {
-        PyErr_SetString(PyExc_RuntimeError, snd_strerror(-err));
-        return NULL;
+        return set_error(-err);
     }
 
     Py_INCREF(Py_None);
@@ -452,13 +459,61 @@ SeqClient_disconnect_to(SeqClient *self, PyObject *args, PyObject *kwds)
     int err = snd_seq_disconnect_to(self->handle, port, dest_client, dest_port);
 
     if (err < 0) {
-        PyErr_SetString(PyExc_RuntimeError, snd_strerror(-err));
-        return NULL;
+        return set_error(-err);
     }
 
     Py_INCREF(Py_None);
     return Py_None;
 }
+
+PyObject *
+SeqClient_connect_from(SeqClient *self, PyObject *args, PyObject *kwds)
+{
+    static char *kwlist[] = {"port", "src_client", "src_port", NULL};
+    int port=-1, src_client=-1, src_port=-1;
+
+    if (! PyArg_ParseTupleAndKeywords(args, kwds, "III", kwlist, &port,&src_client, &src_port))
+        return NULL;
+
+    if (!self->handle) {
+        PyErr_SetString(PyExc_RuntimeError, "already closed");
+        return NULL;
+    }
+
+    int err = snd_seq_connect_from(self->handle, port, src_client, src_port);
+
+    if (err < 0) {
+        return set_error(-err);
+    }
+
+    Py_INCREF(Py_None);
+    return Py_None;
+}
+
+PyObject *
+SeqClient_disconnect_from(SeqClient *self, PyObject *args, PyObject *kwds)
+{
+    static char *kwlist[] = {"port", "src_client", "src_port", NULL};
+    int port=-1, src_client=-1, src_port=-1;
+
+    if (! PyArg_ParseTupleAndKeywords(args, kwds, "III", kwlist, &port,&src_client, &src_port))
+        return NULL;
+
+    if (!self->handle) {
+        PyErr_SetString(PyExc_RuntimeError, "already closed");
+        return NULL;
+    }
+
+    int err = snd_seq_disconnect_from(self->handle, port, src_client, src_port);
+
+    if (err < 0) {
+        return set_error(-err);
+    }
+
+    Py_INCREF(Py_None);
+    return Py_None;
+}
+
 
 PyObject *
 SeqClient_parse_address(SeqClient *self, PyObject *args, PyObject *kwds)
@@ -473,12 +528,115 @@ SeqClient_parse_address(SeqClient *self, PyObject *args, PyObject *kwds)
     int err =  snd_seq_parse_address(self->handle, &addr, name);
 
     if (err < 0) {
-        PyErr_SetString(PyExc_RuntimeError, snd_strerror(-err));
-        return NULL;
+        return set_error(-err);
     }
 
     return Py_BuildValue("bb", addr.client, addr.port);
 }
+
+PyObject *
+SeqClient_fileno(SeqClient *self)
+{
+    // Cheating a bit: ALSA seq API is designed to return a list
+    // of file descriptor for a specific set of poll events.
+    // In fact current ALSA implementation returns single descriptor 
+    // for both POLLIN and POLLOUT.
+
+    if (!self->handle) {
+        PyErr_SetString(PyExc_RuntimeError, "already closed");
+        return NULL;
+    }
+
+    // Just a safety check
+    int fd_count;
+    fd_count = snd_seq_poll_descriptors_count(self->handle, POLLIN|POLLOUT);
+    if (!fd_count)
+        fd_count = snd_seq_poll_descriptors_count(self->handle, POLLIN);
+    if (!fd_count)
+        fd_count = snd_seq_poll_descriptors_count(self->handle, POLLOUT);
+
+    if (!fd_count) {
+        PyErr_SetString(PyExc_OSError, "No file descriptor.");
+        return NULL;
+    }
+    else if (fd_count != 1) {
+        PyErr_SetString(PyExc_OSError, "More than one file descriptor.");
+        return NULL;
+    }
+
+    struct pollfd pfd;
+
+    if (! snd_seq_poll_descriptors(self->handle, &pfd, 1, POLLIN)) {
+        PyErr_SetString(PyExc_OSError, "Could not get file descriptor.");
+        return NULL;
+    }
+
+    return PyLong_FromLong(pfd.fd);
+}
+
+PyObject *
+SeqClient_event_input(SeqClient *self)
+{
+    if (!self->handle) {
+        PyErr_SetString(PyExc_RuntimeError, "already closed");
+        return NULL;
+    }
+
+    snd_seq_event_t *ev;
+
+    int res = snd_seq_event_input(self->handle, &ev);
+    if (res < 0) {
+        return set_error(-res);
+    }
+
+    PyObject * key = PyLong_FromLong(ev->type);
+    PyObject * e_type = PyDict_GetItem(self->event_classes, key);
+    Py_CLEAR(key);
+
+    if (!e_type) {
+        e_type = PyDict_GetItem(self->event_classes, Py_None);
+    }
+
+    if (e_type) {
+        if (!PyType_Check(e_type)) {
+            PyErr_SetString(PyExc_RuntimeError, "event_classes element not a type");
+            return NULL;
+        }
+        if (!PyType_IsSubtype((PyTypeObject *)e_type, (PyTypeObject *)&SeqEventType)) {
+            PyErr_SetString(PyExc_RuntimeError, "event_classes element not a SeqEventType subtype");
+            return NULL;
+        }
+    }
+    else {
+        e_type = (PyObject *)&SeqEventType;
+    }
+    SeqEvent* event = PyObject_New(SeqEvent, ((PyTypeObject *)e_type));
+    if (! event) {
+        return NULL;
+    }
+    Py_INCREF(e_type);
+    event->ev = *ev;
+    return (PyObject *)event;
+}
+
+PyObject *
+SeqClient_event_input_pending(SeqClient *self, PyObject *args, PyObject *kwds)
+{
+    static char *kwlist[] = {"fetch_sequencer", NULL};
+    int fetch_sequencer = 0;
+
+    if (! PyArg_ParseTupleAndKeywords(args, kwds, "|p", kwlist, &fetch_sequencer))
+        return NULL;
+
+    int res =  snd_seq_event_input_pending(self->handle, fetch_sequencer);
+
+    if (res < 0) {
+        return set_error(-res);
+    }
+
+    return PyLong_FromLong(res);
+}
+
 
 
 static PyMethodDef SeqClient_methods[] = {
@@ -521,14 +679,30 @@ static PyMethodDef SeqClient_methods[] = {
     {"disconnect_to", (PyCFunction)SeqClient_disconnect_to, METH_VARARGS | METH_KEYWORDS,
              "Disconnect sending port from external receiver",
     },
+    {"connect_from", (PyCFunction)SeqClient_connect_from, METH_VARARGS | METH_KEYWORDS,
+             "Connect sending port to external receiver",
+    },
+    {"disconnect_from", (PyCFunction)SeqClient_disconnect_from, METH_VARARGS | METH_KEYWORDS,
+             "Disconnect sending port from external receiver",
+    },
     {"parse_address", (PyCFunction)SeqClient_parse_address, METH_VARARGS | METH_KEYWORDS,
              "Convert 'client:port' string or client name to (client,port) tuple",
+    },
+    {"fileno", (PyCFunction)SeqClient_fileno, METH_NOARGS,
+             "File descriptor used by the sequencer",
+    },
+    {"event_input", (PyCFunction)SeqClient_event_input, METH_NOARGS,
+             "Get input event",
+    },
+    {"event_input_pending", (PyCFunction)SeqClient_event_input_pending, METH_VARARGS | METH_KEYWORDS,
+             "Get length of pending input events",
     },
     {NULL}  /* Sentinel */
 };
 
 static PyMemberDef SeqClient_members[] = {
     {"client_id", T_INT, offsetof(SeqClient, client_id), 0, "client id"},
+    {"event_classes", T_OBJECT, offsetof(SeqClient, event_classes), READONLY, "mapping of event id to event class"},
     {NULL}  /* Sentinel */
 };
 
@@ -537,7 +711,7 @@ static PyTypeObject SeqClientType = {
     .tp_name = "opimidi.alsa._seq.SeqClient",
     .tp_basicsize = sizeof(SeqClient),
     .tp_dealloc = (destructor)SeqClient_dealloc,
-    .tp_flags = Py_TPFLAGS_DEFAULT,
+    .tp_flags = Py_TPFLAGS_DEFAULT | Py_TPFLAGS_BASETYPE,
     .tp_doc = "ALSA sequencer client",
     .tp_methods = SeqClient_methods,
     .tp_members = SeqClient_members,
@@ -648,7 +822,7 @@ static PyTypeObject SeqEventType = {
     .tp_name = "opimidi.alsa._seq.SeqEvent",
     .tp_basicsize = sizeof(SeqEvent),
     .tp_dealloc = (destructor)SeqEvent_dealloc,
-    .tp_flags = Py_TPFLAGS_DEFAULT,
+    .tp_flags = Py_TPFLAGS_DEFAULT | Py_TPFLAGS_BASETYPE,
     .tp_doc = "ALSA sequencer event base type",
     .tp_methods = SeqEvent_methods,
     .tp_members = SeqEvent_members,
@@ -688,7 +862,7 @@ static PyTypeObject SeqNoteEventType = {
 
     .tp_name = "opimidi.alsa._seq.SeqNoteEvent",
     .tp_basicsize = sizeof(SeqEvent),
-    .tp_flags = Py_TPFLAGS_DEFAULT,
+    .tp_flags = Py_TPFLAGS_DEFAULT | Py_TPFLAGS_BASETYPE,
     .tp_doc = "ALSA sequencer note event",
     .tp_members = SeqNoteEvent_members,
     .tp_init = (initproc)SeqNoteEvent_init,
@@ -722,7 +896,7 @@ static PyTypeObject SeqNoteOnEventType = {
 
     .tp_name = "opimidi.alsa._seq.SeqNoteOnEvent",
     .tp_basicsize = sizeof(SeqEvent),
-    .tp_flags = Py_TPFLAGS_DEFAULT,
+    .tp_flags = Py_TPFLAGS_DEFAULT | Py_TPFLAGS_BASETYPE,
     .tp_doc = "ALSA sequencer note event",
     .tp_members = SeqNoteOnEvent_members,
     .tp_init = (initproc)SeqNoteOnEvent_init,
@@ -756,7 +930,7 @@ static PyTypeObject SeqNoteOffEventType = {
 
     .tp_name = "opimidi.alsa._seq.SeqNoteOffEvent",
     .tp_basicsize = sizeof(SeqEvent),
-    .tp_flags = Py_TPFLAGS_DEFAULT,
+    .tp_flags = Py_TPFLAGS_DEFAULT | Py_TPFLAGS_BASETYPE,
     .tp_doc = "ALSA sequencer note event",
     .tp_members = SeqNoteOffEvent_members,
     .tp_init = (initproc)SeqNoteOffEvent_init,
@@ -806,7 +980,7 @@ static PyTypeObject SeqControlChangeEventType = {
 
     .tp_name = "opimidi.alsa._seq.SeqControlChangeEvent",
     .tp_basicsize = sizeof(SeqEvent),
-    .tp_flags = Py_TPFLAGS_DEFAULT,
+    .tp_flags = Py_TPFLAGS_DEFAULT | Py_TPFLAGS_BASETYPE,
     .tp_doc = "ALSA sequencer control change event",
     .tp_members = SeqControlChangeEvent_members,
     .tp_init = (initproc)SeqControlChangeEvent_init,
@@ -856,7 +1030,7 @@ static PyTypeObject SeqControlChange14bitEventType = {
 
     .tp_name = "opimidi.alsa._seq.SeqControlChange14bitEvent",
     .tp_basicsize = sizeof(SeqEvent),
-    .tp_flags = Py_TPFLAGS_DEFAULT,
+    .tp_flags = Py_TPFLAGS_DEFAULT | Py_TPFLAGS_BASETYPE,
     .tp_doc = "ALSA sequencer 14-bit control change event",
     .tp_members = SeqControlChange14bitEvent_members,
     .tp_init = (initproc)SeqControlChange14bitEvent_init,
@@ -900,7 +1074,7 @@ static PyTypeObject SeqProgramChangeEventType = {
 
     .tp_name = "opimidi.alsa._seq.SeqProgramChangeEvent",
     .tp_basicsize = sizeof(SeqEvent),
-    .tp_flags = Py_TPFLAGS_DEFAULT,
+    .tp_flags = Py_TPFLAGS_DEFAULT | Py_TPFLAGS_BASETYPE,
     .tp_doc = "ALSA sequencer program change event",
     .tp_members = SeqProgramChangeEvent_members,
     .tp_init = (initproc)SeqProgramChangeEvent_init,
@@ -1033,6 +1207,82 @@ PyInit__seq(void)
     PyModule_AddIntConstant(m, "EVFLG_QUEUE_TICK", SND_SEQ_EVFLG_QUEUE_TICK);
     PyModule_AddIntConstant(m, "EVFLG_QUEUE_TIME", SND_SEQ_EVFLG_QUEUE_TIME);
     PyModule_AddIntConstant(m, "EVFLG_QUEUE_VALUE", SND_SEQ_EVFLG_QUEUE_VALUE);
+    PyModule_AddIntConstant(m, "EVENT_SYSTEM", SND_SEQ_EVENT_SYSTEM);
+    PyModule_AddIntConstant(m, "EVENT_RESULT", SND_SEQ_EVENT_RESULT);
+    PyModule_AddIntConstant(m, "EVENT_NOTE", SND_SEQ_EVENT_NOTE);
+    PyModule_AddIntConstant(m, "EVENT_NOTEON", SND_SEQ_EVENT_NOTEON);
+    PyModule_AddIntConstant(m, "EVENT_NOTEOFF", SND_SEQ_EVENT_NOTEOFF);
+    PyModule_AddIntConstant(m, "EVENT_KEYPRESS", SND_SEQ_EVENT_KEYPRESS);
+    PyModule_AddIntConstant(m, "EVENT_CONTROLLER", SND_SEQ_EVENT_CONTROLLER);
+    PyModule_AddIntConstant(m, "EVENT_PGMCHANGE", SND_SEQ_EVENT_PGMCHANGE);
+    PyModule_AddIntConstant(m, "EVENT_CHANPRESS", SND_SEQ_EVENT_CHANPRESS);
+    PyModule_AddIntConstant(m, "EVENT_PITCHBEND", SND_SEQ_EVENT_PITCHBEND);
+    PyModule_AddIntConstant(m, "EVENT_CONTROL14", SND_SEQ_EVENT_CONTROL14);
+    PyModule_AddIntConstant(m, "EVENT_NONREGPARAM", SND_SEQ_EVENT_NONREGPARAM);
+    PyModule_AddIntConstant(m, "EVENT_REGPARAM", SND_SEQ_EVENT_REGPARAM);
+    PyModule_AddIntConstant(m, "EVENT_SONGPOS", SND_SEQ_EVENT_SONGPOS);
+    PyModule_AddIntConstant(m, "EVENT_SONGSEL", SND_SEQ_EVENT_SONGSEL);
+    PyModule_AddIntConstant(m, "EVENT_QFRAME", SND_SEQ_EVENT_QFRAME);
+    PyModule_AddIntConstant(m, "EVENT_TIMESIGN", SND_SEQ_EVENT_TIMESIGN);
+    PyModule_AddIntConstant(m, "EVENT_KEYSIGN", SND_SEQ_EVENT_KEYSIGN);
+    PyModule_AddIntConstant(m, "EVENT_START", SND_SEQ_EVENT_START);
+    PyModule_AddIntConstant(m, "EVENT_CONTINUE", SND_SEQ_EVENT_CONTINUE);
+    PyModule_AddIntConstant(m, "EVENT_STOP", SND_SEQ_EVENT_STOP);
+    PyModule_AddIntConstant(m, "EVENT_SETPOS_TICK", SND_SEQ_EVENT_SETPOS_TICK);
+    PyModule_AddIntConstant(m, "EVENT_SETPOS_TIME", SND_SEQ_EVENT_SETPOS_TIME);
+    PyModule_AddIntConstant(m, "EVENT_TEMPO", SND_SEQ_EVENT_TEMPO);
+    PyModule_AddIntConstant(m, "EVENT_CLOCK", SND_SEQ_EVENT_CLOCK);
+    PyModule_AddIntConstant(m, "EVENT_TICK", SND_SEQ_EVENT_TICK);
+    PyModule_AddIntConstant(m, "EVENT_QUEUE_SKEW", SND_SEQ_EVENT_QUEUE_SKEW);
+    PyModule_AddIntConstant(m, "EVENT_SYNC_POS", SND_SEQ_EVENT_SYNC_POS);
+    PyModule_AddIntConstant(m, "EVENT_TUNE_REQUEST", SND_SEQ_EVENT_TUNE_REQUEST);
+    PyModule_AddIntConstant(m, "EVENT_RESET", SND_SEQ_EVENT_RESET);
+    PyModule_AddIntConstant(m, "EVENT_SENSING", SND_SEQ_EVENT_SENSING);
+    PyModule_AddIntConstant(m, "EVENT_ECHO", SND_SEQ_EVENT_ECHO);
+    PyModule_AddIntConstant(m, "EVENT_OSS", SND_SEQ_EVENT_OSS);
+    PyModule_AddIntConstant(m, "EVENT_CLIENT_START", SND_SEQ_EVENT_CLIENT_START);
+    PyModule_AddIntConstant(m, "EVENT_CLIENT_EXIT", SND_SEQ_EVENT_CLIENT_EXIT);
+    PyModule_AddIntConstant(m, "EVENT_CLIENT_CHANGE", SND_SEQ_EVENT_CLIENT_CHANGE);
+    PyModule_AddIntConstant(m, "EVENT_PORT_START", SND_SEQ_EVENT_PORT_START);
+    PyModule_AddIntConstant(m, "EVENT_PORT_EXIT", SND_SEQ_EVENT_PORT_EXIT);
+    PyModule_AddIntConstant(m, "EVENT_PORT_CHANGE", SND_SEQ_EVENT_PORT_CHANGE);
+    PyModule_AddIntConstant(m, "EVENT_PORT_SUBSCRIBED", SND_SEQ_EVENT_PORT_SUBSCRIBED);
+    PyModule_AddIntConstant(m, "EVENT_PORT_UNSUBSCRIBED", SND_SEQ_EVENT_PORT_UNSUBSCRIBED);
+    PyModule_AddIntConstant(m, "EVENT_USR0", SND_SEQ_EVENT_USR0);
+    PyModule_AddIntConstant(m, "EVENT_USR1", SND_SEQ_EVENT_USR1);
+    PyModule_AddIntConstant(m, "EVENT_USR2", SND_SEQ_EVENT_USR2);
+    PyModule_AddIntConstant(m, "EVENT_USR3", SND_SEQ_EVENT_USR3);
+    PyModule_AddIntConstant(m, "EVENT_USR4", SND_SEQ_EVENT_USR4);
+    PyModule_AddIntConstant(m, "EVENT_USR5", SND_SEQ_EVENT_USR5);
+    PyModule_AddIntConstant(m, "EVENT_USR6", SND_SEQ_EVENT_USR6);
+    PyModule_AddIntConstant(m, "EVENT_USR7", SND_SEQ_EVENT_USR7);
+    PyModule_AddIntConstant(m, "EVENT_USR8", SND_SEQ_EVENT_USR8);
+    PyModule_AddIntConstant(m, "EVENT_USR9", SND_SEQ_EVENT_USR9);
+    PyModule_AddIntConstant(m, "EVENT_SYSEX", SND_SEQ_EVENT_SYSEX);
+    PyModule_AddIntConstant(m, "EVENT_BOUNCE", SND_SEQ_EVENT_BOUNCE);
+    PyModule_AddIntConstant(m, "EVENT_USR_VAR0", SND_SEQ_EVENT_USR_VAR0);
+    PyModule_AddIntConstant(m, "EVENT_USR_VAR1", SND_SEQ_EVENT_USR_VAR1);
+    PyModule_AddIntConstant(m, "EVENT_USR_VAR2", SND_SEQ_EVENT_USR_VAR2);
+    PyModule_AddIntConstant(m, "EVENT_USR_VAR3", SND_SEQ_EVENT_USR_VAR3);
+    PyModule_AddIntConstant(m, "EVENT_USR_VAR4", SND_SEQ_EVENT_USR_VAR4);
+    PyModule_AddIntConstant(m, "EVENT_NONE", SND_SEQ_EVENT_NONE);
+    PyModule_AddIntConstant(m, "TIME_STAMP_TICK", SND_SEQ_TIME_STAMP_TICK);
+    PyModule_AddIntConstant(m, "TIME_STAMP_REAL", SND_SEQ_TIME_STAMP_REAL);
+    PyModule_AddIntConstant(m, "TIME_STAMP_MASK", SND_SEQ_TIME_STAMP_MASK);
+    PyModule_AddIntConstant(m, "TIME_MODE_ABS", SND_SEQ_TIME_MODE_ABS);
+    PyModule_AddIntConstant(m, "TIME_MODE_REL", SND_SEQ_TIME_MODE_REL);
+    PyModule_AddIntConstant(m, "TIME_MODE_MASK", SND_SEQ_TIME_MODE_MASK);
+    PyModule_AddIntConstant(m, "EVENT_LENGTH_FIXED", SND_SEQ_EVENT_LENGTH_FIXED);
+    PyModule_AddIntConstant(m, "EVENT_LENGTH_VARIABLE", SND_SEQ_EVENT_LENGTH_VARIABLE);
+    PyModule_AddIntConstant(m, "EVENT_LENGTH_VARUSR", SND_SEQ_EVENT_LENGTH_VARUSR);
+    PyModule_AddIntConstant(m, "EVENT_LENGTH_MASK", SND_SEQ_EVENT_LENGTH_MASK);
+    PyModule_AddIntConstant(m, "PRIORITY_NORMAL", SND_SEQ_PRIORITY_NORMAL);
+    PyModule_AddIntConstant(m, "PRIORITY_HIGH", SND_SEQ_PRIORITY_HIGH);
+    PyModule_AddIntConstant(m, "PRIORITY_MASK", SND_SEQ_PRIORITY_MASK);
+
+    SeqError = PyErr_NewException("opimidi._seq.SeqError", NULL, NULL);
+    Py_INCREF(SeqError);
+    PyModule_AddObject(m, "SeqError", SeqError);
 
     return m;
 }
