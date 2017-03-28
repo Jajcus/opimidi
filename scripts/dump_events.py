@@ -22,8 +22,18 @@ try:
 except (OSError, seq.SeqError) as err:
     print("could not connect from aplaymidi: {}".format(err))
 
+try:
+    client.connect_from(port, seq.CLIENT_SYSTEM, seq.PORT_SYSTEM_ANNOUNCE)
+except (OSError, seq.SeqError) as err:
+    print("could not connect from system announce: {}".format(err))
+
 def callback(event):
     print(repr(event))
+    if isinstance(event, seq.SeqAddressEvent):
+        try:
+            print("  client:", repr(client.get_client_info(event.client)))
+        except FileNotFoundError:
+            print("  client not found")
 
 print("Now waiting for events:")
 loop = asyncio.get_event_loop()

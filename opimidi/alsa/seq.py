@@ -102,6 +102,41 @@ class ProgramChangeEvent(_seq.SeqProgramChangeEvent):
             "#{0.value}"
             .format(self))
 
+class _AddressEvent(_seq.SeqAddressEvent):
+    __slots__ = ()
+    def __repr__(self):
+        return SeqEvent._repr(self, "{0.client}:{0.port}" .format(self))
+
+class ClientStartEvent(_AddressEvent):
+    __slots__ = ()
+    def __init__(self, client=0, port=0, **kwargs):
+        super().__init__(EVENT_CLIENT_START, client, port, **kwargs)
+
+class ClientExitEvent(_AddressEvent):
+    __slots__ = ()
+    def __init__(self, client=0, port=0, **kwargs):
+        super().__init__(EVENT_CLIENT_EXIT, client, port, **kwargs)
+
+class ClientChangeEvent(_AddressEvent):
+    __slots__ = ()
+    def __init__(self, client=0, port=0, **kwargs):
+        super().__init__(EVENT_CLIENT_CHANGE, client, port, **kwargs)
+
+class PortStartEvent(_AddressEvent):
+    __slots__ = ()
+    def __init__(self, client=0, port=0, **kwargs):
+        super().__init__(EVENT_PORT_START, client, port, **kwargs)
+
+class PortExitEvent(_AddressEvent):
+    __slots__ = ()
+    def __init__(self, client=0, port=0, **kwargs):
+        super().__init__(EVENT_PORT_EXIT, client, port, **kwargs)
+
+class PortChangeEvent(_AddressEvent):
+    __slots__ = ()
+    def __init__(self, client=0, port=0, **kwargs):
+        super().__init__(EVENT_PORT_CHANGE, client, port, **kwargs)
+
 EVENT_CLASS_MAP = {
         None: SeqEvent, # default
         EVENT_NOTE: NoteEvent,
@@ -110,4 +145,10 @@ EVENT_CLASS_MAP = {
         EVENT_CONTROLLER: ControlChangeEvent,
         EVENT_CONTROL14: ControlChange14bitEvent,
         EVENT_PGMCHANGE: ProgramChangeEvent,
+        EVENT_CLIENT_START: ClientStartEvent,
+        EVENT_CLIENT_EXIT: ClientExitEvent,
+        EVENT_CLIENT_CHANGE: ClientChangeEvent,
+        EVENT_PORT_START: PortStartEvent,
+        EVENT_PORT_EXIT: PortExitEvent,
+        EVENT_PORT_CHANGE: PortChangeEvent,
         }

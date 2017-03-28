@@ -637,6 +637,60 @@ SeqClient_event_input_pending(SeqClient *self, PyObject *args, PyObject *kwds)
     return PyLong_FromLong(res);
 }
 
+PyObject *
+SeqClient_get_client_info(SeqClient *self, PyObject *args, PyObject *kwds)
+{
+    static char *kwlist[] = {"client", NULL};
+    PyObject *client_o = NULL;
+    int err;
+    snd_seq_client_info_t *client_info;
+
+    if (! PyArg_ParseTupleAndKeywords(args, kwds, "|O!", kwlist, &PyLong_Type, &client_o))
+        return NULL;
+
+    if (!self->handle) {
+        PyErr_SetString(PyExc_RuntimeError, "already closed");
+        return NULL;
+    }
+
+    err = snd_seq_client_info_malloc(&client_info);
+    if (err < 0) {
+        return set_error(-err);
+    }
+
+    if (client_o) {
+        long client = PyLong_AsLong(client_o);
+        if (PyErr_Occurred()) return NULL;
+        if (client < 0 || client > 255) {
+            PyErr_SetString(PyExc_ValueError, "client id must be 0-255");
+            snd_seq_client_info_free(client_info);
+            return NULL;
+        }
+        err = snd_seq_get_any_client_info(self->handle, client, client_info);
+    }
+    else {
+        err = snd_seq_get_client_info(self->handle, client_info);
+    }
+    if (err < 0) {
+        snd_seq_client_info_free(client_info);
+        return set_error(-err);
+    }
+
+    PyObject* result = PyDict_New();
+    if (!result) {
+        snd_seq_client_info_free(client_info);
+        return NULL;
+    }
+
+    PyDict_SetItemString(result, "client", PyLong_FromLong(snd_seq_client_info_get_client(client_info)));
+    PyDict_SetItemString(result, "type", PyLong_FromLong(snd_seq_client_info_get_type(client_info)));
+    PyDict_SetItemString(result, "name", PyUnicode_FromString(snd_seq_client_info_get_name(client_info)));
+
+    snd_seq_client_info_free(client_info);
+
+    return result;
+}
+
 
 
 static PyMethodDef SeqClient_methods[] = {
@@ -696,6 +750,9 @@ static PyMethodDef SeqClient_methods[] = {
     },
     {"event_input_pending", (PyCFunction)SeqClient_event_input_pending, METH_VARARGS | METH_KEYWORDS,
              "Get length of pending input events",
+    },
+    {"get_client_info", (PyCFunction)SeqClient_get_client_info, METH_VARARGS | METH_KEYWORDS,
+             "Get client info",
     },
     {NULL}  /* Sentinel */
 };
@@ -949,7 +1006,7 @@ SeqControlChangeEvent_init(SeqEvent *self, PyObject *args, PyObject *kwds)
                                  &self->ev.data.control.param,
                                  &self->ev.data.control.value,
                                  EVENT_ARGPTRS);
-    if (res) {
+    if (!res) {
         // SeqEvent_init_generic succeeded
         if (self->ev.data.control.channel < 0 || self->ev.data.control.channel > 127) {
             PyErr_SetString(PyExc_ValueError, "'channel' must be 0-127");
@@ -999,7 +1056,7 @@ SeqControlChange14bitEvent_init(SeqEvent *self, PyObject *args, PyObject *kwds)
                                  &self->ev.data.control.param,
                                  &self->ev.data.control.value,
                                  EVENT_ARGPTRS);
-    if (res) {
+    if (!res) {
         // SeqEvent_init_generic succeeded
         if (self->ev.data.control.channel < 0 || self->ev.data.control.channel > 127) {
             PyErr_SetString(PyExc_ValueError, "'channel' must be 0-127");
@@ -1048,7 +1105,7 @@ SeqProgramChangeEvent_init(SeqEvent *self, PyObject *args, PyObject *kwds)
                                  &self->ev.data.control.channel,
                                  &self->ev.data.control.value,
                                  EVENT_ARGPTRS);
-    if (res) {
+    if (!res) {
         // SeqEvent_init_generic succeeded
         if (self->ev.data.control.channel < 0 || self->ev.data.control.channel > 127) {
             PyErr_SetString(PyExc_ValueError, "'channel' must be 0-127");
@@ -1081,6 +1138,50 @@ static PyTypeObject SeqProgramChangeEventType = {
     .tp_base = &SeqEventType,
 };
 
+static int
+SeqAddressEvent_init(SeqEvent *self, PyObject *args, PyObject *kwds)
+{
+    static char *argformat = "b" EVENT_ARGS "|bb" EVENT_OARGS;
+    static char *kwlist[] = {"type", "client", "port",
+                             EVENT_KWARGS, NULL};
+    int res = SeqEvent_init_generic(self, args, kwds, SND_SEQ_EVENT_NONE,
+                                 argformat, kwlist,
+                                 &self->ev.type,
+                                 &self->ev.data.addr.client,
+                                 &self->ev.data.addr.port,
+                                 EVENT_ARGPTRS);
+    if (!res) {
+        // SeqEvent_init_generic succeeded
+        if (self->ev.data.control.channel < 0 || self->ev.data.control.channel > 127) {
+            PyErr_SetString(PyExc_ValueError, "'channel' must be 0-127");
+            return -1;
+        }
+        if (self->ev.data.control.value < 0 || self->ev.data.control.value > 127) {
+            PyErr_SetString(PyExc_ValueError, "'value' must be 0-127");
+            return -1;
+        }
+    }
+    return res;
+}
+
+static PyMemberDef SeqAddressEvent_members[] = {
+    {"type", T_UBYTE, offsetof(SeqEvent, ev.type), READONLY, "event type"},
+    {"client", T_UBYTE, offsetof(SeqEvent, ev.data.addr.client), 0, "client"},
+    {"port", T_UBYTE, offsetof(SeqEvent, ev.data.addr.port), 0, "port"},
+    {NULL}  /* Sentinel */
+};
+
+static PyTypeObject SeqAddressEventType = {
+    PyVarObject_HEAD_INIT(NULL, 0)
+
+    .tp_name = "opimidi.alsa._seq.SeqAddressEvent",
+    .tp_basicsize = sizeof(SeqEvent),
+    .tp_flags = Py_TPFLAGS_DEFAULT | Py_TPFLAGS_BASETYPE,
+    .tp_doc = "Any ALSA sequencer address events",
+    .tp_members = SeqAddressEvent_members,
+    .tp_init = (initproc)SeqAddressEvent_init,
+    .tp_base = &SeqEventType,
+};
 
 static PyModuleDef seqmodule = {
     PyModuleDef_HEAD_INIT,
@@ -1113,6 +1214,8 @@ PyInit__seq(void)
         return NULL;
     if (PyType_Ready(&SeqProgramChangeEventType) < 0)
         return NULL;
+    if (PyType_Ready(&SeqAddressEventType) < 0)
+        return NULL;
 
     m = PyModule_Create(&seqmodule);
     if (m == NULL)
@@ -1136,6 +1239,8 @@ PyInit__seq(void)
     PyModule_AddObject(m, "SeqControlChange14bitEvent", (PyObject *)&SeqControlChange14bitEventType);
     Py_INCREF(&SeqProgramChangeEventType);
     PyModule_AddObject(m, "SeqProgramChangeEvent", (PyObject *)&SeqProgramChangeEventType);
+    Py_INCREF(&SeqAddressEventType);
+    PyModule_AddObject(m, "SeqAddressEvent", (PyObject *)&SeqAddressEventType);
 
     PyModule_AddIntConstant(m, "OPEN_OUTPUT", SND_SEQ_OPEN_OUTPUT);
     PyModule_AddIntConstant(m, "OPEN_INPUT", SND_SEQ_OPEN_INPUT);
