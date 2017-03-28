@@ -4,6 +4,8 @@ import logging
 import os
 import time
 
+from .lcd_chars import LCD_CHARS
+
 logger = logging.getLogger("lcd")
 
 BACKLIGHT_LED = "/sys/devices/platform/opimidi-lcd-leds/leds/backlight"
@@ -37,6 +39,9 @@ FUNCTION_SET_CMD = 0x20
 FS_4BITS = 0x10
 FS_2LINES = 0x08
 FS_FONT5x10 = 0x04
+
+SET_CGRAM_ADDR_CMD = 0x40
+CGRAM_ADDR_MASK = 0x3f
 
 SET_DDRAM_ADDR_CMD = 0x80
 DDRAM_ADDR_MASK = 0x7f
@@ -144,6 +149,12 @@ class LCD:
         self._set_bit("RS", 0)
         time.sleep(0.00005)
 
+    def define_user_chars(self):
+        for i, ch_bytes in enumerate(LCD_CHARS):
+            self.set_cgram_addr(i << 3)
+            for byte in ch_bytes:
+                self._write_byte(byte)
+
     def get_write_files(self):
         return list(self._gpio_v_files.values()) + [self._backlight_v_fn]
 
@@ -188,6 +199,10 @@ class LCD:
         cmd = SET_DDRAM_ADDR_CMD | (addr & DDRAM_ADDR_MASK)
         self._write_cmd(cmd)
 
+    def set_cgram_addr(self, addr):
+        cmd = SET_CGRAM_ADDR_CMD | (addr & CGRAM_ADDR_MASK)
+        self._write_cmd(cmd)
+
     def write(self, line, column, string):
         if line not in (0, 1):
             raise ValueError("Line must be 0 or 1")
@@ -203,7 +218,9 @@ if __name__ == "__main__":
     lcd = LCD()
     lcd.set_display(cursor=False, blink=False)
     lcd.set_backlight(True)
+    lcd.define_user_chars()
     lcd.write(0, 0, "Hello World!")
+    lcd.write(1, 0, "    \x00\x01\x02\x03\x04\x05\x06\x07    ")
     input()
     lcd.clear()
     lcd.set_backlight(False)
