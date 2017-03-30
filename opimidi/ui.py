@@ -15,6 +15,7 @@ from .util import run_async_jobs, abort
 from .input import EventHandler, make_devices
 from .lcd import LCD
 from .config import Config
+from .midi_monitor import MIDIMonitor
 
 BANNER = "*** OPIMIDI ***"
 
@@ -286,10 +287,18 @@ class OpimidiUI(EventHandler):
         self.backend = backend
         if backend:
             backend.ui = self
+        self.midi_monitor = MIDIMonitor(self)
         self._pressed = {}
         self.config = Config()
         self.lcd = LCD()
         self.lcd.set_display(cursor=False, blink=False)
+        self.lcd.define_user_chars()
+        self.monitor_pos = {
+                "1": (0, 0),
+                "2": (0, self.lcd.width - 1),
+                "A": (1, 0),
+                "B": (1, self.lcd.width - 1),
+                }
         self.input_queue = asyncio.Queue(QUEUE_SIZE)
         banks = self.config.get_banks()
         logger.debug("Configured banks: %r", banks)
@@ -311,20 +320,50 @@ class OpimidiUI(EventHandler):
     def select_program(self, index, in_backend=True):
         self.cur_prog_i = index % len(self.programs)
         self.program = self.programs[self.cur_prog_i]
+        self.midi_monitor.set_program(self.program)
         if in_backend:
             self.backend.send_frame([
                 ["set_program", self.bank.name, self.program.name],
                 ])
 
+    def show_monitors(self):
+        for name in ["1", "2", "A", "B"]:
+            value = self.midi_monitor.monitor_values.get(name)
+            self.set_monitor(name, value)
+
+    def set_monitor(self, name, value):
+        try:
+            line, col = self.monitor_pos[name]
+        except KeyError:
+            logger.debug("No such monitor: %r", name)
+            return
+        if value is None:
+            char = " "
+        else:
+            char = chr(value)
+        self.lcd.write(line, col, char)
+
     def write_centered(self, line, text):
-        text = text[:self.lcd.width].center(self.lcd.width)
-        self.lcd.write(line, 0, text)
+        if self.midi_monitor.monitors:
+            width = self.lcd.width - 2
+            x = 1
+        else:
+            width = self.lcd.width
+            x = 0
+        text = text[:width].center(width)
+        self.lcd.write(line, x, text)
 
     def write_three(self, line, text1, text2, text3):
-        space_left = self.lcd.width - len(text1) - len(text3)
+        if self.midi_monitor.monitors:
+            width = self.lcd.width - 2
+            x = 1
+        else:
+            width = self.lcd.width
+            x = 0
+        space_left = width - len(text1) - len(text3)
         text2 = text2[:space_left].center(space_left)
         text = text1 + text2 + text3
-        self.lcd.write(line, 0, text[:self.lcd.width])
+        self.lcd.write(line, x, text[:width])
  
     async def input(self, timeout=None):
         get_item = self.input_queue.get()

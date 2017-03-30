@@ -12,6 +12,15 @@ class ConfigBank:
             self.settings = settings
         else:
             self.settings = {}
+    def __contains__(self, key):
+        return key in self.settings
+    def __getitem__(self, key):
+        try:
+            return self.settings[key]
+        except configparser.Error as err:
+            logger.error("Config error: [%s:%s] %r: %s",
+                         self.bank.name, self.name, key, err)
+            raise KeyError(key)
 
 class ConfigProgram:
     def __init__(self, bank, name, settings=None):
