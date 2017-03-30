@@ -36,11 +36,11 @@ class BankSelect(MidiAction):
         midi_val = bank_number - 1
         self.event = seq.SeqControlChange14btEvent(param=0, value=midi_val)
 
-def message(self, value):
-        if value > 0.5:
-            return [self.event]
-        else:
-            return []
+    def message(self, value):
+            if value > 0.5:
+                return [self.event]
+            else:
+                return []
 
 class ProgramChange(MidiAction):
     def __init__(self, program_number):
