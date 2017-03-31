@@ -1,0 +1,12 @@
+[Unit]
+Description=Opimidi front-end
+Requires=opimidi_be.service
+After=opimidi_be.service
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/opimidi_fe
+User=opimidi
+
+[Install]
+WantedBy=multi-user.target

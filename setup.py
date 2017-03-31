@@ -65,7 +65,8 @@ setup(
     ext_modules=[seq_ext],
     entry_points={
         'console_scripts': [
-            'opimidi = opimidi.main:main',
+            'opimidi_be = opimidi.backend:main',
+            'opimidi_fe = opimidi.frontend:main',
             'opimidi_set_permissions = opimidi.tools:opimidi_set_permissions',
             'opimidi_start_usb = opimidi.usb:opimidi_start_usb',
             'opimidi_stop_usb = opimidi.usb:opimidi_stop_usb',

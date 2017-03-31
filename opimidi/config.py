@@ -1,6 +1,8 @@
+
 import configparser
 from collections import OrderedDict
 import logging
+import os
 
 logger = logging.getLogger("config")
 
@@ -44,7 +46,10 @@ class Config:
     def __init__(self):
         self.config = configparser.ConfigParser(
                 interpolation=configparser.ExtendedInterpolation())
-        self.config.read("opimidi.config")
+        if os.path.exists("opimidi.config"):
+            self.config.read("opimidi.config")
+        else:
+            self.config.read("/etc/opimidi.config")
         self.banks = OrderedDict()
         for section in self.config:
             if ":" in section:

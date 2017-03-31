@@ -1,0 +1,15 @@
+[Unit]
+Description=Opimidi back-end
+Requires=opimidi_usb.service
+After=opimidi_usb.service
+
+[Service]
+Type=simple
+ExecStartPre=/usr/local/bin/opimidi_set_permissions
+ExecStart=/usr/local/bin/opimidi_be
+Nice=-15
+User=opimidi
+PermissionsStartOnly=true
+
+[Install]
+WantedBy=multi-user.target
