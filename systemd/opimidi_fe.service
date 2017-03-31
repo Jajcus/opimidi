@@ -1,7 +1,7 @@
 [Unit]
 Description=Opimidi front-end
-Requires=opimidi_be.service
-After=opimidi_be.service
+Requires=opimidi_be.socket opimidi_perms.service
+After=opimidi_be.socket opimidi_perms.service
 
 [Service]
 Type=simple

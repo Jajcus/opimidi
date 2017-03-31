@@ -93,7 +93,7 @@ SeqClient_create_port(SeqClient *self, PyObject *args, PyObject *kwds)
         return NULL;
 
     if (!self->handle) {
-        PyErr_SetString(PyExc_RuntimeError, "already closed");
+        PyErr_SetString(SeqError, "already closed");
         return NULL;
     }
 
@@ -115,7 +115,7 @@ SeqClient_delete_port(SeqClient *self, PyObject *args, PyObject *kwds)
         return NULL;
 
     if (!self->handle) {
-        PyErr_SetString(PyExc_RuntimeError, "already closed");
+        PyErr_SetString(SeqError, "already closed");
         return NULL;
     }
 
@@ -139,7 +139,7 @@ SeqClient_create_queue(SeqClient *self, PyObject *args, PyObject *kwds)
         return NULL;
 
     if (!self->handle) {
-        PyErr_SetString(PyExc_RuntimeError, "already closed");
+        PyErr_SetString(SeqError, "already closed");
         return NULL;
     }
 
@@ -167,7 +167,7 @@ SeqClient_delete_queue(SeqClient *self, PyObject *args, PyObject *kwds)
         return NULL;
 
     if (!self->handle) {
-        PyErr_SetString(PyExc_RuntimeError, "already closed");
+        PyErr_SetString(SeqError, "already closed");
         return NULL;
     }
 
@@ -193,7 +193,7 @@ SeqClient_set_queue_tempo(SeqClient *self, PyObject *args, PyObject *kwds)
         return NULL;
 
     if (!self->handle) {
-        PyErr_SetString(PyExc_RuntimeError, "already closed");
+        PyErr_SetString(SeqError, "already closed");
         return NULL;
     }
 
@@ -224,7 +224,7 @@ SeqClient_control_queue(SeqClient *self, PyObject *args, PyObject *kwds,
         return NULL;
 
     if (!self->handle) {
-        PyErr_SetString(PyExc_RuntimeError, "already closed");
+        PyErr_SetString(SeqError, "already closed");
         return NULL;
     }
 
@@ -284,7 +284,7 @@ SeqClient_event_output(SeqClient *self, PyObject *args, PyObject *kwds)
         return NULL;
 
     if (!self->handle) {
-        PyErr_SetString(PyExc_RuntimeError, "already closed");
+        PyErr_SetString(SeqError, "already closed");
         return NULL;
     }
 
@@ -386,7 +386,7 @@ PyObject *
 SeqClient_drain_output(SeqClient *self)
 {
     if (!self->handle) {
-        PyErr_SetString(PyExc_RuntimeError, "already closed");
+        PyErr_SetString(SeqError, "already closed");
         return NULL;
     }
 
@@ -404,7 +404,7 @@ PyObject *
 SeqClient_drop_output(SeqClient *self)
 {
     if (!self->handle) {
-        PyErr_SetString(PyExc_RuntimeError, "already closed");
+        PyErr_SetString(SeqError, "already closed");
         return NULL;
     }
 
@@ -428,7 +428,7 @@ SeqClient_connect_to(SeqClient *self, PyObject *args, PyObject *kwds)
         return NULL;
 
     if (!self->handle) {
-        PyErr_SetString(PyExc_RuntimeError, "already closed");
+        PyErr_SetString(SeqError, "already closed");
         return NULL;
     }
 
@@ -452,7 +452,7 @@ SeqClient_disconnect_to(SeqClient *self, PyObject *args, PyObject *kwds)
         return NULL;
 
     if (!self->handle) {
-        PyErr_SetString(PyExc_RuntimeError, "already closed");
+        PyErr_SetString(SeqError, "already closed");
         return NULL;
     }
 
@@ -476,7 +476,7 @@ SeqClient_connect_from(SeqClient *self, PyObject *args, PyObject *kwds)
         return NULL;
 
     if (!self->handle) {
-        PyErr_SetString(PyExc_RuntimeError, "already closed");
+        PyErr_SetString(SeqError, "already closed");
         return NULL;
     }
 
@@ -500,7 +500,7 @@ SeqClient_disconnect_from(SeqClient *self, PyObject *args, PyObject *kwds)
         return NULL;
 
     if (!self->handle) {
-        PyErr_SetString(PyExc_RuntimeError, "already closed");
+        PyErr_SetString(SeqError, "already closed");
         return NULL;
     }
 
@@ -543,7 +543,7 @@ SeqClient_fileno(SeqClient *self)
     // for both POLLIN and POLLOUT.
 
     if (!self->handle) {
-        PyErr_SetString(PyExc_RuntimeError, "already closed");
+        PyErr_SetString(SeqError, "already closed");
         return NULL;
     }
 
@@ -578,7 +578,7 @@ PyObject *
 SeqClient_event_input(SeqClient *self)
 {
     if (!self->handle) {
-        PyErr_SetString(PyExc_RuntimeError, "already closed");
+        PyErr_SetString(SeqError, "already closed");
         return NULL;
     }
 
@@ -599,11 +599,11 @@ SeqClient_event_input(SeqClient *self)
 
     if (e_type) {
         if (!PyType_Check(e_type)) {
-            PyErr_SetString(PyExc_RuntimeError, "event_classes element not a type");
+            PyErr_SetString(SeqError, "event_classes element not a type");
             return NULL;
         }
         if (!PyType_IsSubtype((PyTypeObject *)e_type, (PyTypeObject *)&SeqEventType)) {
-            PyErr_SetString(PyExc_RuntimeError, "event_classes element not a SeqEventType subtype");
+            PyErr_SetString(SeqError, "event_classes element not a SeqEventType subtype");
             return NULL;
         }
     }
@@ -649,7 +649,7 @@ SeqClient_get_client_info(SeqClient *self, PyObject *args, PyObject *kwds)
         return NULL;
 
     if (!self->handle) {
-        PyErr_SetString(PyExc_RuntimeError, "already closed");
+        PyErr_SetString(SeqError, "already closed");
         return NULL;
     }
 

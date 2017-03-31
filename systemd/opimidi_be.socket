@@ -1,0 +1,10 @@
+[Unit]
+Description=Opimidi back-end socket
+
+[Socket]
+ListenStream=/run/opimidi/backend.socket
+SocketUser=opimidi
+SocketGroup=opimidi
+
+[Install]
+WantedBy=sockets.target

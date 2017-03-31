@@ -43,11 +43,11 @@ class MIDISender(EventHandler):
                                          seq.PORT_TYPE_MIDI_GENERIC)
         try:
             dest_client, dest_port = self.seq.parse_address(MIDI_DEST)
-        except RuntimeError as err:
+        except (OSError, seq.SeqError) as err:
             logger.error("could not parse 'aseqdump': %s", err)
         try:
             self.seq.connect_to(self.port, dest_client, dest_port)
-        except RuntimeError as err:
+        except (OSError, seq.SeqError) as err:
             logger.error("could not connect to %s:%s: %s", dest_addr, dest_port, err)
 
     def apply_ops(self, ops, value=1.0):

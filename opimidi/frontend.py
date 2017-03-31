@@ -5,6 +5,7 @@ from functools import partial
 import logging
 import os
 import signal
+import sys
 
 from .input import InputEvent
 from .ui import OpimidiUI
@@ -13,8 +14,8 @@ from .comm import CommProtocol
 
 logger = logging.getLogger("main")
 
-SOCKET_DIR = os.environ.get("XDG_RUNTIME_DIR", "/tmp")
-BACKEND_SOCKET = os.path.join(SOCKET_DIR, "opimidi.sock")
+SOCKET_DIR = os.environ.get("XDG_RUNTIME_DIR", "/run/opimidi")
+BACKEND_SOCKET = os.path.join(SOCKET_DIR, "backend.socket")
 
 class FrontendProtocol(CommProtocol):
     def __init__(self, loop):
@@ -46,7 +47,7 @@ def main():
             transport, protocol = loop.run_until_complete(connect)
         except OSError as err:
             logger.error("Could not connect to the backend: %s", err)
-            return
+            sys.exit(1)
         ui = OpimidiUI(protocol)
         loop.run_until_complete(ui.run())
         transport.abort()

@@ -66,7 +66,7 @@ class LCD:
                 if label == GPIO_LABEL:
                     break
         else:
-            raise RuntimeError("Could not find GPIO chip {!r}".format(GPIO_LABEL))
+            raise FileNotFoundError("Could not find GPIO chip {!r}".format(GPIO_LABEL))
 
         base_fn = os.path.join(gpiochip_path, "base")
         with open(base_fn, "rt") as base_f:

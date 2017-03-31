@@ -1,0 +1,10 @@
+[Unit]
+Description=Opimidi device permissions
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/opimidi_set_permissions
+RemainAfterExit=true
+
+[Install]
+WantedBy=multi-user.target

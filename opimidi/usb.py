@@ -72,7 +72,7 @@ def _rm(path):
 def make_usb_gadget():
     udcs = os.listdir("/sys/class/udc")
     if len(udcs) < 1:
-        raise RuntimeError("No UDC available!")
+        raise FileNotFoundError("No UDC available!")
     gadget_dir = os.path.join(CONFIGFS_HOME, "usb_gadget", CONFIGFS_GADGET_NAME)
     _new_dir(gadget_dir)
     _write_file("idVendor", VENDOR_ID)
@@ -126,7 +126,7 @@ def opimidi_start_usb():
     _parse_cmdline()
     try:
         make_usb_gadget()
-    except (EnvironmentError, RuntimeError) as err:
+    except OSError as err:
         print(err, file=sys.stderr)
         sys.exit(1)
 
@@ -134,6 +134,6 @@ def opimidi_stop_usb():
     _parse_cmdline()
     try:
         remove_usb_gadget()
-    except (EnvironmentError, RuntimeError) as err:
+    except OSError as err:
         print(err, file=sys.stderr)
         sys.exit(1)

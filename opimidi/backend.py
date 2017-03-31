@@ -5,6 +5,7 @@ from functools import partial
 import logging
 import os
 import signal
+import socket
 
 from .comm import CommProtocol
 from .config import Config
@@ -14,8 +15,11 @@ from .util import abort, signal_handler
 
 logger = logging.getLogger("main")
 
-SOCKET_DIR = os.environ.get("XDG_RUNTIME_DIR", "/tmp")
-BACKEND_SOCKET = os.path.join(SOCKET_DIR, "opimidi.sock")
+# used when not using socket activation
+SOCKET_DIR = os.environ.get("XDG_RUNTIME_DIR", "/run/opimidi")
+BACKEND_SOCKET = os.path.join(SOCKET_DIR, "backend.socket")
+
+SD_LISTEN_FDS_START = 3
 
 class BackendEventHandler(EventHandler):
     def __init__(self, midi_sender):
@@ -51,6 +55,26 @@ class BackendProtocol(CommProtocol):
     def cmd_set_program(self, bank_n, prog_n):
         self.midi_sender.set_program(bank_n, prog_n)
 
+def get_activation_socket():
+    try:
+        listen_fds = int(os.environ["LISTEN_FDS"])
+        listen_pid = int(os.environ["LISTEN_PID"])
+    except (KeyError, ValueError) as err:
+        logger.debug("No usable $LISTEN_FDS - no socket activation")
+        return None
+    if listen_fds < 1:
+        logger.debug("No usable $LISTEN_FDS - no socket activation")
+        return None
+    pid = os.getpid()
+    if pid != listen_pid:
+        logger.debug("$LISTEN_FDS=%r is not us (%r)", listen_pid, pid)
+        return None
+    logger.debug("Using activation socket from systemd: %r",
+                 SD_LISTEN_FDS_START)
+    return socket.socket(family=socket.AF_UNIX,
+                         type=socket.SOCK_STREAM,
+                         fileno=SD_LISTEN_FDS_START)
+
 def main():
     parser = argparse.ArgumentParser(description="OPiMIDI back-end")
     parser.add_argument("--debug", dest="log_level",
@@ -70,7 +94,11 @@ def main():
         logger.debug("Creating backend socket...")
         try:
             proto_f = partial(BackendProtocol, loop, event_handler)
-            create_server = loop.create_unix_server(proto_f, BACKEND_SOCKET)
+            sock = get_activation_socket()
+            if sock:
+                create_server = loop.create_unix_server(proto_f, sock=sock)
+            else:
+                create_server = loop.create_unix_server(proto_f, BACKEND_SOCKET)
             server = loop.run_until_complete(create_server)
         except OSError as err:
             logger.error("Could create server: %s", err)
