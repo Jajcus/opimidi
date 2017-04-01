@@ -3,9 +3,10 @@
 / {
 	compatible = "xunlong,orangepi-zero", "allwinner,sun8i-h2plus", "allwinner,sun8i-h3";
 
-        /*
-         * Disable uneeded hardware
-         */
+	/*
+	 * TinyRTC module with DS1307 RTC  on i2c bust and DS18B20 temperature sensor on a one-wire bus
+	 */ 
+
 	fragment0 {
                 // UART1, pins are used for 1wire
 		target = <&uart1>;
@@ -13,11 +14,7 @@
 		    status = "disabled";
 		};
 	};
-
-        /*
-         * Enable and configure opimidi hardware
-         */
-        fragment100 {
+        fragment1 {
                 // i2c-0, with the DS1307 RTC
 		target = <&i2c0>;
 		__overlay__ {
@@ -30,8 +27,7 @@
                     };
                 };
         };
-
-        fragment120 {
+        fragment2 {
                 // gpio pin for 1-wire
 		target = <&pio>;
 		__overlay__ {
@@ -43,7 +39,7 @@
                     };
                 };
         };
-	fragment130 {
+	fragment3 {
 		target-path = "/";
 		__overlay__ {
                     // 1-wire on PG06 for the DS18B20 sensor
@@ -56,6 +52,5 @@
 		};
 	};
 };
-
 
 // vi: sw=4 sts=4 et

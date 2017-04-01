@@ -1,0 +1,52 @@
+/dts-v1/;
+/plugin/;
+/ {
+	compatible = "xunlong,orangepi-zero", "allwinner,sun8i-h2plus", "allwinner,sun8i-h3";
+
+	fragment0 {
+                // UART2, pins are used for gpio-keys
+		target = <&uart2>;
+		__overlay__ {
+		    status = "disabled";
+		};
+	};
+        fragment1 {
+                // gpio pins for the keys
+		target = <&pio>;
+		__overlay__ {
+                    opimidi_button_pins {
+			allwinner,pins = "PA0", "PA1", "PA2";
+			allwinner,function = "gpio_in";
+			allwinner,drive = <0>; //<SUN4I_PINCTRL_10_MA>;
+			allwinner,pull = <1>; //<SUN4I_PINCTRL_PULL_UP>;	
+                    };
+                };
+        };
+	fragment2 {
+		target-path = "/";
+		__overlay__ {
+                    // The buttons on PA00-PA02
+		    opimidi-keys {
+			compatible = "gpio-keys";
+                        button0 {
+                           label = "BTN0";
+                           linux,code = <0x100>;
+                           gpios = <&pio 0 0 1>;
+                        };
+                        button1 {
+                           label = "BTN1";
+                           linux,code = <0x101>;
+                           gpios = <&pio 0 1 1>;
+                        };
+                        button2 {
+                           label = "BTN2";
+                           linux,code = <0x102>;
+                           gpios = <&pio 0 2 1>;
+                        };
+		    };
+		};
+	};
+};
+
+
+// vi: sw=4 sts=4 et

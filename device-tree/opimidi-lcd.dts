@@ -1,0 +1,39 @@
+/dts-v1/;
+/plugin/;
+/ {
+	compatible = "xunlong,orangepi-zero", "allwinner,sun8i-h2plus", "allwinner,sun8i-h3";
+
+        fragment0 {
+                // i2c-0, with the LCD GPIO
+		target = <&i2c0>;
+		__overlay__ {
+                    status = "okay";
+                    #address-cells = <1>;
+                    #size-cells = <0>;
+                    lcd_gpios: pcf8574@3f {
+                        compatible = "nxp,pcf8574";
+                        reg = <0x3f>;
+                        gpio-controller;
+                        #gpio-cells = <2>;
+                        ngpios = <8>;
+                        gpio-line-names = "RS", "RW", "E", "BL", "D5", "D6", "D7", "D8";
+                    };
+                };
+        };
+
+	fragment1 {
+		target-path = "/";
+		__overlay__ {
+                    // The LCD backlight
+                    opimidi-lcd-leds {
+                        compatible = "gpio-leds";
+                        backlight {
+                            gpios = <&lcd_gpios 3 0>;
+                            default-state = "off";
+                        };
+                    };
+		};
+	};
+};
+
+// vi: sw=4 sts=4 et

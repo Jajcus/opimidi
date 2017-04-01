@@ -1,0 +1,22 @@
+/dts-v1/;
+/plugin/;
+/ {
+	compatible = "xunlong,orangepi-zero", "allwinner,sun8i-h2plus", "allwinner,sun8i-h3";
+
+        fragment0 {
+                // i2c-1, with the ADC
+		target = <&i2c1>;
+		__overlay__ {
+                    status = "okay";
+                    #address-cells = <1>;
+                    #size-cells = <0>;
+                    pcf8591@48 {
+                        compatible = "pcf8591";
+                        reg = <0x48>;
+                    };
+                };
+        };
+};
+
+
+// vi: sw=4 sts=4 et
