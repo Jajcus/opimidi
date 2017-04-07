@@ -1,0 +1,330 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<!-- Created with Fritzing (http://www.fritzing.org/) -->
+<svg xmlns="http://www.w3.org/2000/svg" y="0in" width="1.0075in" x="0in" height="2.1085in" version="1.2" gorn="0"  id="svg2" viewBox="0 0 25.59041 53.554815">
+    <desc >
+        <referenceFile >schematic-o.svg</referenceFile>
+    </desc>
+    <metadata  id="metadata110">
+        <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+            <cc:Work xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:cc="http://creativecommons.org/ns#" rdf:about="">
+                <dc:format xmlns:dc="http://purl.org/dc/elements/1.1/">image/svg+xml</dc:format>
+                <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/"/>
+                <dc:title xmlns:dc="http://purl.org/dc/elements/1.1/"/>
+            </cc:Work>
+        </rdf:RDF>
+    </metadata>
+    <g transform="matrix(-1 0 0 1 20.444 5.2048)" >
+        <g >
+            <g >
+                <g gorn="0.2.0.0.0"  id="g4654">
+                    <g transform="matrix(-1 0 0 1 15.193 0)" >
+                        <g >
+                            <g >
+                                <rect style="fill:none" y="40.516" width=".24694" x="-.12347" height=".24694" class="terminal" />
+                            </g>
+                        </g>
+                    </g>
+                    <line style="stroke-linecap:round;" x1="20.195" y2="40.64" y1="40.64" stroke-width=".24694" stroke="#787878" x2="15.115" class="pin" gorn="0.2.0.0.0.1"  id="connector15pin-4" fill="none"/>
+                    <circle style="fill:#787878" cx="20.32" gorn="0.2.0.0.0.2"  id="connector21pin" cy="40.64" r=".12444"/>
+                </g>
+            </g>
+        </g>
+    </g>
+    <g transform="matrix(-1 0 0 1 20.444 2.6648)" >
+        <g >
+            <g >
+                <g gorn="0.3.0.0.0"  id="g4654-9">
+                    <g transform="matrix(-1 0 0 1 15.193 0)" >
+                        <g >
+                            <g >
+                                <rect style="fill:none" y="40.516" width=".24694" x="-.12347" height=".24694" class="terminal" gorn="0.3.0.0.0.0.0.0.0"  id="connector15terminal-4"/>
+                            </g>
+                        </g>
+                    </g>
+                    <line style="stroke-linecap:round;" x1="20.195" y2="40.64" y1="40.64" stroke-width=".24694" stroke="#787878" x2="15.115" class="pin" gorn="0.3.0.0.0.1"  id="connector15pin-4-5" fill="none"/>
+                    <circle style="fill:#787878" cx="20.32" gorn="0.3.0.0.0.2"  id="connector20pin" cy="40.64" r=".12444"/>
+                </g>
+            </g>
+        </g>
+    </g>
+    <g transform="matrix(-1 0 0 1 20.444 -30.355)" >
+        <g >
+            <g >
+                <g gorn="0.4.0.0.0"  id="g4654-9-3-8">
+                    <g transform="matrix(-1 0 0 1 15.193 0)" >
+                        <g >
+                            <g >
+                                <rect style="fill:none" y="40.516" width=".24694" x="-.12347" height=".24694" class="terminal" gorn="0.4.0.0.0.0.0.0.0"  id="connector15terminal-4-5-1"/>
+                            </g>
+                        </g>
+                    </g>
+                    <line style="stroke-linecap:round;" x1="20.195" y2="40.64" y1="40.64" stroke-width=".24694" stroke="#787878" x2="15.115" class="pin" gorn="0.4.0.0.0.1"  id="connector15pin-4-5-7-9" fill="none"/>
+                    <circle style="fill:#787878" cx="20.32" gorn="0.4.0.0.0.2"  id="connector19pin" cy="40.64" r=".12444"/>
+                </g>
+            </g>
+        </g>
+    </g>
+    <g transform="matrix(-1 0 0 1 20.444 -32.895)" >
+        <g >
+            <g >
+                <g gorn="0.5.0.0.0"  id="g4654-9-3">
+                    <g transform="matrix(-1 0 0 1 15.193 0)" >
+                        <g >
+                            <g >
+                                <rect style="fill:none" y="40.516" width=".24694" x="-.12347" height=".24694" class="terminal" gorn="0.5.0.0.0.0.0.0.0"  id="connector15terminal-4-5"/>
+                            </g>
+                        </g>
+                    </g>
+                    <line style="stroke-linecap:round;" x1="20.195" y2="40.64" y1="40.64" stroke-width=".24694" stroke="#787878" x2="15.115" class="pin" gorn="0.5.0.0.0.1"  id="connector15pin-4-5-7" fill="none"/>
+                    <circle style="fill:#787878" cx="20.32" gorn="0.5.0.0.0.2"  id="connector18pin" cy="40.64" r=".12444"/>
+                </g>
+            </g>
+        </g>
+    </g>
+    <g transform="matrix(0 1 1 0 10.226 33.11)" >
+        <g >
+            <g >
+                <g gorn="0.6.0.0.0"  id="g4628-2-9">
+                    <line style="stroke-linecap:round;" x1="20.195" y2="2.54" y1="2.54" stroke-width=".24694" stroke="#787878" x2="15.115" class="pin" gorn="0.6.0.0.0.0"  id="connector0pin-0-6" fill="none"/>
+                    <circle style="fill:#787878" cx="20.32" gorn="0.6.0.0.0.1"  id="connector16pin" cy="2.54" r=".12444"/>
+                </g>
+            </g>
+        </g>
+    </g>
+    <g transform="matrix(0 -1 1 0 10.226 20.444)" >
+        <g >
+            <g >
+                <g gorn="0.7.0.0.0"  id="g4628-2">
+                    <line style="stroke-linecap:round;" x1="20.195" y2="2.54" y1="2.54" stroke-width=".24694" stroke="#787878" x2="15.115" class="pin" gorn="0.7.0.0.0.0"  id="connector0pin-0" fill="none"/>
+                    <circle style="fill:#787878" cx="20.32" gorn="0.7.0.0.0.1"  id="connector17pin" cy="2.54" r=".12444"/>
+                </g>
+            </g>
+        </g>
+    </g>
+    <g transform="translate(5.146 5.2048)" >
+        <g >
+            <g >
+                <g gorn="0.8.0.0.0"  id="g4624">
+                    <line style="stroke-linecap:round;" x1="20.195" y2="5.08" y1="5.08" stroke-width=".24694" stroke="#787878" x2="15.115" class="pin"  fill="none"/>
+                    <circle style="fill:#787878" cx="20.32" gorn="0.8.0.0.0.1"  id="connector1pin" cy="5.08" r=".12444"/>
+                </g>
+            </g>
+        </g>
+    </g>
+    <g transform="translate(5.146 5.2048)" >
+        <g >
+            <g >
+                <g gorn="0.9.0.0.0"  id="g4616">
+                    <line style="stroke-linecap:round;" x1="20.195" y2="10.16" y1="10.16" stroke-width=".24694" stroke="#787878" x2="15.115" class="pin"  fill="none"/>
+                    <circle style="fill:#787878" cx="20.32" gorn="0.9.0.0.0.1"  id="connector3pin" cy="10.16" r=".12444"/>
+                </g>
+            </g>
+        </g>
+    </g>
+    <g transform="translate(5.146 5.2048)" >
+        <g >
+            <g >
+                <g gorn="0.10.0.0.0"  id="g4620">
+                    <line style="stroke-linecap:round;" x1="20.195" y2="7.62" y1="7.62" stroke-width=".24694" stroke="#787878" x2="15.115" class="pin"  fill="none"/>
+                    <circle style="fill:#787878" cx="20.32" gorn="0.10.0.0.0.1"  id="connector2pin" cy="7.62" r=".12444"/>
+                </g>
+            </g>
+        </g>
+    </g>
+    <g transform="translate(5.146 5.2048)" >
+        <g >
+            <g >
+                <g gorn="0.11.0.0.0"  id="g4612">
+                    <line style="stroke-linecap:round;" x1="20.195" y2="12.7" y1="12.7" stroke-width=".24694" stroke="#787878" x2="15.115" class="pin"  fill="none"/>
+                    <circle style="fill:#787878" cx="20.32" gorn="0.11.0.0.0.1"  id="connector4pin" cy="12.7" r=".12444"/>
+                </g>
+            </g>
+        </g>
+    </g>
+    <g transform="translate(5.146 5.2048)" >
+        <g >
+            <g >
+                <g gorn="0.12.0.0.0"  id="g4607">
+                    <line style="stroke-linecap:round;" x1="20.195" y2="15.24" y1="15.24" stroke-width=".24694" stroke="#787878" x2="15.115" class="pin"  fill="none"/>
+                    <circle style="fill:#787878" cx="20.32" gorn="0.12.0.0.0.1"  id="path3507-0-6-2" cy="15.24" r=".12444"/>
+                    <circle style="fill:#787878" cx="20.32" gorn="0.12.0.0.0.2"  id="connector5pin" cy="15.24" r=".12444"/>
+                </g>
+            </g>
+        </g>
+    </g>
+    <g transform="translate(5.146 5.2048)" >
+        <g >
+            <g >
+                <g gorn="0.13.0.0.0"  id="g4603">
+                    <line style="stroke-linecap:round;" x1="20.195" y2="17.78" y1="17.78" stroke-width=".24694" stroke="#787878" x2="15.115" class="pin"  fill="none"/>
+                    <circle style="fill:#787878" cx="20.32" gorn="0.13.0.0.0.1"  id="connector6pin" cy="17.78" r=".12444"/>
+                </g>
+            </g>
+        </g>
+    </g>
+    <g transform="translate(5.146 5.2048)" >
+        <g >
+            <g >
+                <g gorn="0.14.0.0.0"  id="g4599">
+                    <line style="stroke-linecap:round;" x1="20.195" y2="20.32" y1="20.32" stroke-width=".24694" stroke="#787878" x2="15.115" class="pin"  fill="none"/>
+                    <circle style="fill:#787878" cx="20.32" gorn="0.14.0.0.0.1"  id="connector7pin" cy="20.32" r=".12444"/>
+                </g>
+            </g>
+        </g>
+    </g>
+    <g transform="translate(5.146 5.2048)" >
+        <g >
+            <g >
+                <g gorn="0.15.0.0.0"  id="g4595">
+                    <line style="stroke-linecap:round;" x1="20.195" y2="22.86" y1="22.86" stroke-width=".24694" stroke="#787878" x2="15.115" class="pin"  fill="none"/>
+                    <circle style="fill:#787878" cx="20.32" gorn="0.15.0.0.0.1"  id="connector8pin" cy="22.86" r=".12444"/>
+                </g>
+            </g>
+        </g>
+    </g>
+    <g transform="translate(5.146 5.2048)" >
+        <g >
+            <g >
+                <g gorn="0.16.0.0.0"  id="g4591">
+                    <line style="stroke-linecap:round;" x1="20.195" y2="25.4" y1="25.4" stroke-width=".24694" stroke="#787878" x2="15.115" class="pin"  fill="none"/>
+                    <circle style="fill:#787878" cx="20.32" gorn="0.16.0.0.0.1"  id="connector9pin" cy="25.4" r=".12444"/>
+                </g>
+            </g>
+        </g>
+    </g>
+    <g transform="translate(5.146 5.2048)" >
+        <g >
+            <g >
+                <g gorn="0.17.0.0.0"  id="g4587">
+                    <line style="stroke-linecap:round;" x1="20.195" y2="27.94" y1="27.94" stroke-width=".24694" stroke="#787878" x2="15.115" class="pin"  fill="none"/>
+                    <circle style="fill:#787878" cx="20.32" gorn="0.17.0.0.0.1"  id="connector10pin" cy="27.94" r=".12444"/>
+                </g>
+            </g>
+        </g>
+    </g>
+    <g transform="translate(5.146 5.2048)" >
+        <g >
+            <g >
+                <g gorn="0.18.0.0.0"  id="g4583">
+                    <line style="stroke-linecap:round;" x1="20.195" y2="30.48" y1="30.48" stroke-width=".24694" stroke="#787878" x2="15.115" class="pin"  fill="none"/>
+                    <circle style="fill:#787878" cx="20.32" gorn="0.18.0.0.0.1"  id="connector11pin" cy="30.48" r=".12444"/>
+                </g>
+            </g>
+        </g>
+    </g>
+    <g transform="translate(5.146 5.2048)" >
+        <g >
+            <g >
+                <g gorn="0.19.0.0.0"  id="g4579">
+                    <line style="stroke-linecap:round;" x1="20.195" y2="33.02" y1="33.02" stroke-width=".24694" stroke="#787878" x2="15.115" class="pin"  fill="none"/>
+                    <circle style="fill:#787878" cx="20.32" gorn="0.19.0.0.0.1"  id="connector12pin" cy="33.02" r=".12444"/>
+                </g>
+            </g>
+        </g>
+    </g>
+    <g transform="translate(5.146 5.2048)" >
+        <g >
+            <g >
+                <g gorn="0.20.0.0.0"  id="g4575">
+                    <line style="stroke-linecap:round;" x1="20.195" y2="35.56" y1="35.56" stroke-width=".24694" stroke="#787878" x2="15.115" class="pin"  fill="none"/>
+                    <circle style="fill:#787878" cx="20.32" gorn="0.20.0.0.0.1"  id="connector13pin" cy="35.56" r=".12444"/>
+                </g>
+            </g>
+        </g>
+    </g>
+    <g transform="translate(5.146 5.2048)" >
+        <g >
+            <g >
+                <g gorn="0.21.0.0.0"  id="g4571">
+                    <line style="stroke-linecap:round;" x1="20.195" y2="38.1" y1="38.1" stroke-width=".24694" stroke="#787878" x2="15.115" class="pin"  fill="none"/>
+                    <circle style="fill:#787878" cx="20.32" gorn="0.21.0.0.0.1"  id="connector14pin" cy="38.1" r=".12444"/>
+                </g>
+            </g>
+        </g>
+    </g>
+    <g transform="translate(5.146 5.2048)" >
+        <g >
+            <g >
+                <g gorn="0.22.0.0.0"  id="g4567">
+                    <line style="stroke-linecap:round;" x1="20.195" y2="40.64" y1="40.64" stroke-width=".24694" stroke="#787878" x2="15.115" class="pin"  fill="none"/>
+                    <circle style="fill:#787878" cx="20.32" gorn="0.22.0.0.0.1"  id="connector15pin" cy="40.64" r=".12444"/>
+                </g>
+            </g>
+        </g>
+    </g>
+    <g transform="translate(5.146 5.2048)" >
+        <g >
+            <g >
+                <g gorn="0.23.0.0.0"  id="g4628">
+                    <line style="stroke-linecap:round;" x1="20.195" y2="2.54" y1="2.54" stroke-width=".24694" stroke="#787878" x2="15.115" class="pin"  fill="none"/>
+                    <circle style="fill:#787878" cx="20.32" gorn="0.23.0.0.0.1"  id="connector0pin" cy="2.54" r=".12444"/>
+                </g>
+            </g>
+        </g>
+    </g>
+    <g transform="scale(-1,1)" >
+        <g >
+            <g >
+                <rect style="stroke-linecap:round;" y="5.3636" width="14.922" stroke-width=".3175" x="-20.225" stroke="#000" height="42.862" class="interior rect" gorn="0.24.0.0.0"  id="rect5" fill="#fff"/>
+            </g>
+        </g>
+    </g>
+    <rect style="fill:none" y="7.6214" width=".24694" x="5.0225" height=".24694" class="terminal" />
+    <rect style="fill:none" y="10.161" width=".24694" x="5.0225" height=".24694" class="terminal" />
+    <rect style="fill:none" y="12.701" width=".24694" x="5.0225" height=".24694" class="terminal" />
+    <rect style="fill:none" y="15.241" width=".24694" x="5.0225" height=".24694" class="terminal" />
+    <rect style="fill:none" y="17.781" width=".24694" x="5.0225" height=".24694" class="terminal" />
+    <rect style="fill:none" y="20.321" width=".24694" x="5.0225" height=".24694" class="terminal" />
+    <rect style="fill:none" y="22.861" width=".24694" x="5.0225" height=".24694" class="terminal" />
+    <rect style="fill:none" y="25.401" width=".24694" x="5.0225" height=".24694" class="terminal" />
+    <rect style="fill:none" y="27.941" width=".24694" x="5.0225" height=".24694" class="terminal" />
+    <rect style="fill:none" y="30.481" width=".24694" x="5.0225" height=".24694" class="terminal" />
+    <rect style="fill:none" y="33.021" width=".24694" x="5.0225" height=".24694" class="terminal" />
+    <rect style="fill:none" y="35.561" width=".24694" x="5.0225" height=".24694" class="terminal" />
+    <rect style="fill:none" y="38.101" width=".24694" x="5.0225" height=".24694" class="terminal" />
+    <rect style="fill:none" y="40.641" width=".24694" x="5.0225" height=".24694" class="terminal" />
+    <rect style="fill:none" y="43.181" width=".24694" x="5.0225" height=".24694" class="terminal" />
+    <g font-size=".88194" gorn="0.40"  id="g4307">
+        <text style="font-size:.88194px;font-family:Droid Sans;text-anchor:middle;fill:#8c8c8c" y="7.3744121" x="22.080793" class="text" gorn="0.40.0"  id="text8">1</text>
+        <text style="font-size:.88194px;font-family:Droid Sans;text-anchor:middle;fill:#8c8c8c" y="9.9144125" x="22.080793" class="text" gorn="0.40.1"  id="text14">2</text>
+        <text style="font-size:.88194px;font-family:Droid Sans;text-anchor:middle;fill:#8c8c8c" y="12.454412" x="22.080793" class="text" gorn="0.40.2"  id="text20">3</text>
+        <text style="font-size:.88194px;font-family:Droid Sans;text-anchor:middle;fill:#8c8c8c" y="14.994412" x="22.080793" class="text" gorn="0.40.3"  id="text26">4</text>
+        <text style="font-size:.88194px;font-family:Droid Sans;text-anchor:middle;fill:#8c8c8c" y="17.534433" x="22.080793" class="text" gorn="0.40.4"  id="text32">5</text>
+        <text style="font-size:.88194px;font-family:Droid Sans;text-anchor:middle;fill:#8c8c8c" y="20.074432" x="22.080793" class="text" gorn="0.40.5"  id="text38">6</text>
+        <text style="font-size:.88194px;font-family:Droid Sans;text-anchor:middle;fill:#8c8c8c" y="22.614431" x="22.080793" class="text" gorn="0.40.6"  id="text44">7</text>
+        <text style="font-size:.88194px;font-family:Droid Sans;text-anchor:middle;fill:#8c8c8c" y="25.154432" x="22.080793" class="text" gorn="0.40.7"  id="text50">8</text>
+        <text style="font-size:.88194px;font-family:Droid Sans;text-anchor:middle;fill:#8c8c8c" y="27.694431" x="22.080793" class="text" gorn="0.40.8"  id="text56">9</text>
+        <text style="font-size:.88194px;font-family:Droid Sans;text-anchor:middle;fill:#8c8c8c" y="30.234432" x="22.080793" class="text" gorn="0.40.9"  id="text62">10</text>
+        <text style="font-size:.88194px;font-family:Droid Sans;text-anchor:middle;fill:#8c8c8c" y="32.774433" x="22.080793" class="text" gorn="0.40.10"  id="text68">11</text>
+        <text style="font-size:.88194px;font-family:Droid Sans;text-anchor:middle;fill:#8c8c8c" y="35.314434" x="22.080793" class="text" gorn="0.40.11"  id="text74">12</text>
+        <text style="font-size:.88194px;font-family:Droid Sans;text-anchor:middle;fill:#8c8c8c" y="37.854435" x="22.080793" class="text" gorn="0.40.12"  id="text80">13</text>
+        <text style="font-size:.88194px;font-family:Droid Sans;text-anchor:middle;fill:#8c8c8c" y="40.394436" x="22.080793" class="text" gorn="0.40.13"  id="text86">14</text>
+        <text style="font-size:.88194px;font-family:Droid Sans;text-anchor:middle;fill:#8c8c8c" y="42.934433" x="22.080793" class="text" gorn="0.40.14"  id="text92">15</text>
+        <text style="font-size:.88194px;font-family:Droid Sans;text-anchor:middle;fill:#8c8c8c" y="45.474434" x="22.080793" class="text" gorn="0.40.15"  id="text98">16</text>
+    </g>
+    <text style="font-size:1.4993px;writing-mode:lr;fill:#000000;text-anchor:middle;font-family:Droid Sans;line-height:100%;text-align:center" y="18.401522" font-size="1.4993" x="13.064682" class="text" gorn="0.41"  id="label">LCM1602</text>
+    <g font-size="1.2347" gorn="0.42"  id="g4283">
+        <text style="font-size:1.4111px;line-height:100%;font-family:Droid Sans;fill:#8c8c8c" y="7.9917722" x="17.291313" class="text" gorn="0.42.0"  id="text10">VSS</text>
+        <text style="font-size:1.4111px;line-height:100%;font-family:Droid Sans;fill:#8c8c8c" y="10.531773" x="16.848274" class="text" gorn="0.42.1"  id="text16">VDD</text>
+        <text style="font-size:1.4111px;line-height:100%;font-family:Droid Sans;fill:#8c8c8c" y="13.071773" x="17.981022" class="text" gorn="0.42.2"  id="text22">V0</text>
+        <text style="font-size:1.4111px;line-height:100%;font-family:Droid Sans;fill:#8c8c8c" y="15.611732" x="17.994112" class="text" gorn="0.42.3"  id="text28">RS</text>
+        <text style="font-size:1.4111px;line-height:100%;font-family:Droid Sans;fill:#8c8c8c" y="18.151733" x="16.902018" class="text" gorn="0.42.4"  id="text34">R/W</text>
+        <text style="font-size:1.4111px;line-height:100%;font-family:Droid Sans;fill:#8c8c8c" y="20.691732" x="18.834026" class="text" gorn="0.42.5"  id="text40">E</text>
+        <text style="font-size:1.4111px;line-height:100%;font-family:Droid Sans;fill:#8c8c8c" y="23.231731" x="16.94198" class="text" gorn="0.42.6"  id="text46">DB0</text>
+        <text style="font-size:1.4111px;line-height:100%;font-family:Droid Sans;fill:#8c8c8c" y="25.771732" x="17.163157" class="text" gorn="0.42.7"  id="text52">DB1</text>
+        <text style="font-size:1.4111px;line-height:100%;font-family:Droid Sans;fill:#8c8c8c" y="28.311731" x="16.958517" class="text" gorn="0.42.8"  id="text58">DB2</text>
+        <text style="font-size:1.4111px;line-height:100%;font-family:Droid Sans;fill:#8c8c8c" y="30.851732" x="16.959896" class="text" gorn="0.42.9"  id="text64">DB3</text>
+        <text style="font-size:1.4111px;line-height:100%;font-family:Droid Sans;fill:#8c8c8c" y="33.391731" x="16.904085" class="text" gorn="0.42.10"  id="text70">DB4</text>
+        <text style="font-size:1.4111px;line-height:100%;font-family:Droid Sans;fill:#8c8c8c" y="35.931732" x="16.954384" class="text" gorn="0.42.11"  id="text76">DB5</text>
+        <text style="font-size:1.4111px;line-height:100%;font-family:Droid Sans;fill:#8c8c8c" y="38.471733" x="16.940603" class="text" gorn="0.42.12"  id="text82">DB6</text>
+        <text style="font-size:1.4111px;line-height:100%;font-family:Droid Sans;fill:#8c8c8c" y="41.011734" x="16.943359" class="text" gorn="0.42.13"  id="text88">DB7</text>
+        <text style="font-size:1.4111px;line-height:100%;font-family:Droid Sans;fill:#8c8c8c" y="43.551735" x="16.383875" class="text" gorn="0.42.14"  id="text94">LED+</text>
+        <text style="font-size:1.4111px;line-height:100%;font-family:Droid Sans;fill:#8c8c8c" y="46.091736" x="16.692556" class="text" gorn="0.42.15"  id="text100">LED-</text>
+        <text style="font-size:1.4111px;writing-mode:lr;fill:#8c8c8c;font-family:Droid Sans;line-height:100%" y="7.9917736" x="5.6676955" class="text" gorn="0.42.16"  id="text10-3">SDA</text>
+        <text style="font-size:1.4111px;writing-mode:lr;fill:#8c8c8c;font-family:Droid Sans;line-height:100%" y="10.531774" x="5.6676955" class="text" gorn="0.42.17"  id="text16-4">SCL</text>
+        <text style="font-size:1.4111px;writing-mode:lr;fill:#8c8c8c;font-family:Droid Sans;line-height:100%" y="43.551739" x="5.5561609" class="text" gorn="0.42.18"  id="text94-9">LED_A</text>
+        <text style="font-size:1.4111px;writing-mode:lr;fill:#8c8c8c;font-family:Droid Sans;line-height:100%" y="46.09174" x="5.5561609" class="text" gorn="0.42.19"  id="text100-0">LED_B</text>
+        <text style="font-size:1.4111px;writing-mode:lr;fill:#8c8c8c;font-family:Droid Sans;line-height:100%" y="6.7626939" x="11.509451" class="text" gorn="0.42.20"  id="text10-1">VCC</text>
+        <text style="font-size:1.4111px;writing-mode:lr;fill:#8c8c8c;font-family:Droid Sans;line-height:100%" y="47.76693" x="11.351493" class="text" gorn="0.42.21"  id="text10-2">GND</text>
+    </g>
+</svg>

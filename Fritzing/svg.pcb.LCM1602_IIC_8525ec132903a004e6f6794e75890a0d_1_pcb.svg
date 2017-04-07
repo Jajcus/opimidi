@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<!-- Created with Fritzing (http://www.fritzing.org/) -->
+<svg xmlns="http://www.w3.org/2000/svg" y="0in" baseProfile="tiny" width="1.65354in" x="0in" height="0.748028in" version="1.2"  viewBox="0 0 1653.54 748.028">
+    <desc >
+        <referenceFile >LCM1602_IIC.svg</referenceFile>
+    </desc>
+    <g gorn="0.1"  id="silkscreen">
+        <line x1="1653.54" y2="748.028" y1="748.028" stroke-width="20" stroke="#FFFFFF" x2="0" gorn="0.1.0"  id="0.1.0" fill="none"/>
+        <line x1="1653.54" y2="0" y1="0" stroke-width="20" stroke="#FFFFFF" x2="0" gorn="0.1.1"  id="0.1.1" fill="none"/>
+        <line x1="0" y2="0" y1="748.028" stroke-width="20" stroke="#FFFFFF" x2="0" gorn="0.1.2"  id="0.1.2" fill="none"/>
+        <line x1="1653.54" y2="0" y1="236.208" stroke-width="20" stroke="#FFFFFF" x2="1653.54" gorn="0.1.3"  id="0.1.3" fill="none"/>
+        <line x1="1653.54" y2="511.806" y1="748.028" stroke-width="20" stroke="#FFFFFF" x2="1653.54" gorn="0.1.4"  id="0.1.4" fill="none"/>
+    </g>
+    <g gorn="0.2"  id="copper0">
+        <g gorn="0.2.0"  id="0.2.0">
+            <circle stroke-width="20" stroke="#FFBF00" cx="86.8471" gorn="0.2.0.0"  id="connector21pin" cy="283.472" r="27.5" fill="none"/>
+            <circle stroke-width="20" stroke="#FFBF00" cx="86.8471" gorn="0.2.0.1"  id="connector20pin" cy="383.458" r="27.5" fill="none"/>
+            <circle stroke-width="20" stroke="#FFBF00" cx="86.8471" gorn="0.2.0.2"  id="connector21pin_1_" cy="283.472" r="27.5" fill="none"/>
+            <circle stroke-width="20" stroke="#FFBF00" cx="86.8471" gorn="0.2.0.3"  id="connector20pin_1_" cy="383.458" r="27.5" fill="none"/>
+        </g>
+        <g gorn="0.2.1"  id="0.2.1">
+            <circle stroke-width="20" stroke="#FFBF00" cx="1186.86" gorn="0.2.1.0"  id="connector4pin" cy="76.0556" r="27.4861" fill="none"/>
+            <circle stroke-width="20" stroke="#FFBF00" cx="1086.86" gorn="0.2.1.1"  id="connector5pin" cy="76.0556" r="27.5" fill="none"/>
+            <circle stroke-width="20" stroke="#FFBF00" cx="986.874" gorn="0.2.1.2"  id="connector6pin" cy="76.0556" r="27.5" fill="none"/>
+            <circle stroke-width="20" stroke="#FFBF00" cx="486.861" gorn="0.2.1.3"  id="0.1.1.3" cy="76.0695" r="27.5" fill="none"/>
+            <circle stroke-width="20" stroke="#FFBF00" cx="886.86" gorn="0.2.1.4"  id="connector7pin" cy="76.0556" r="27.4861" fill="none"/>
+            <circle stroke-width="20" stroke="#FFBF00" cx="386.861" gorn="0.2.1.5"  id="0.1.1.5" cy="76.0695" r="27.5" fill="none"/>
+            <circle stroke-width="20" stroke="#FFBF00" cx="786.86" gorn="0.2.1.6"  id="connector8pin" cy="76.0556" r="27.5" fill="none"/>
+            <circle stroke-width="20" stroke="#FFBF00" cx="286.847" gorn="0.2.1.7"  id="connector13pin" cy="76.0695" r="27.5" fill="none"/>
+            <circle stroke-width="20" stroke="#FFBF00" cx="686.86" gorn="0.2.1.8"  id="connector9pin" cy="76.0556" r="27.5" fill="none"/>
+            <circle stroke-width="20" stroke="#FFBF00" cx="186.847" gorn="0.2.1.9"  id="0.1.1.9" cy="76.0695" r="27.5" fill="none"/>
+            <circle stroke-width="20" stroke="#FFBF00" cx="586.861" gorn="0.2.1.10"  id="connector10pin" cy="76.0556" r="27.5" fill="none"/>
+            <circle stroke-width="20" stroke="#FFBF00" cx="86.8471" gorn="0.2.1.11"  id="0.1.1.11" cy="76.0695" r="27.5" fill="none"/>
+            <rect y="48.5695" width="55.0138" stroke-width="20" x="1559.35" stroke="#FFBF00" height="55" gorn="0.2.1.12"  id="square" fill="none"/>
+            <circle stroke-width="20" stroke="#FFBF00" cx="1586.86" gorn="0.2.1.13"  id="connector0pin" cy="76.0556" r="27.5" fill="none"/>
+            <circle stroke-width="20" stroke="#FFBF00" cx="1486.87" gorn="0.2.1.14"  id="connector1pin" cy="76.0556" r="27.5" fill="none"/>
+            <circle stroke-width="20" stroke="#FFBF00" cx="1386.86" gorn="0.2.1.15"  id="connector2pin" cy="76.0556" r="27.4861" fill="none"/>
+            <circle stroke-width="20" stroke="#FFBF00" cx="1286.86" gorn="0.2.1.16"  id="connector3pin" cy="76.0556" r="27.5" fill="none"/>
+            <rect y="48.5695" width="55.0138" stroke-width="20" x="1559.35" stroke="#FFBF00" height="55" gorn="0.2.1.17"  id="square_1_" fill="none"/>
+            <circle stroke-width="20" stroke="#FFBF00" cx="1586.86" gorn="0.2.1.18"  id="connector0pin_1_" cy="76.0556" r="27.5" fill="none"/>
+            <circle stroke-width="20" stroke="#FFBF00" cx="1486.87" gorn="0.2.1.19"  id="connector1pin_1_" cy="76.0556" r="27.5" fill="none"/>
+            <circle stroke-width="20" stroke="#FFBF00" cx="1386.86" gorn="0.2.1.20"  id="connector2pin_1_" cy="76.0556" r="27.4861" fill="none"/>
+            <circle stroke-width="20" stroke="#FFBF00" cx="1286.86" gorn="0.2.1.21"  id="connector3pin_1_" cy="76.0556" r="27.5" fill="none"/>
+            <circle stroke-width="20" stroke="#FFBF00" cx="1186.86" gorn="0.2.1.22"  id="connector4pin_1_" cy="76.0556" r="27.4861" fill="none"/>
+            <circle stroke-width="20" stroke="#FFBF00" cx="1086.86" gorn="0.2.1.23"  id="connector5pin_1_" cy="76.0556" r="27.5" fill="none"/>
+            <circle stroke-width="20" stroke="#FFBF00" cx="986.874" gorn="0.2.1.24"  id="connector6pin_1_" cy="76.0556" r="27.5" fill="none"/>
+            <circle stroke-width="20" stroke="#FFBF00" cx="486.861" gorn="0.2.1.25"  id="connector11pin" cy="76.0695" r="27.5" fill="none"/>
+            <circle stroke-width="20" stroke="#FFBF00" cx="886.86" gorn="0.2.1.26"  id="connector7pin_1_" cy="76.0556" r="27.4861" fill="none"/>
+            <circle stroke-width="20" stroke="#FFBF00" cx="386.861" gorn="0.2.1.27"  id="connector12pin" cy="76.0695" r="27.5" fill="none"/>
+            <circle stroke-width="20" stroke="#FFBF00" cx="786.86" gorn="0.2.1.28"  id="connector8pin_1_" cy="76.0556" r="27.5" fill="none"/>
+            <circle stroke-width="20" stroke="#FFBF00" cx="286.847" gorn="0.2.1.29"  id="connector13pin_1_" cy="76.0695" r="27.5" fill="none"/>
+            <circle stroke-width="20" stroke="#FFBF00" cx="686.86" gorn="0.2.1.30"  id="connector9pin_1_" cy="76.0556" r="27.5" fill="none"/>
+            <circle stroke-width="20" stroke="#FFBF00" cx="186.847" gorn="0.2.1.31"  id="connector14pin" cy="76.0695" r="27.5" fill="none"/>
+            <circle stroke-width="20" stroke="#FFBF00" cx="586.861" gorn="0.2.1.32"  id="connector10pin_1_" cy="76.0556" r="27.5" fill="none"/>
+            <circle stroke-width="20" stroke="#FFBF00" cx="86.8471" gorn="0.2.1.33"  id="connector15pin" cy="76.0695" r="27.5" fill="none"/>
+        </g>
+        <g gorn="0.2.2"  id="0.2.2">
+            <rect y="248.556" width="54.9999" stroke-width="20" x="1559.36" stroke="#FFBF00" height="55.0139" gorn="0.2.2.0"  id="square_3_" fill="none"/>
+            <circle stroke-width="20" stroke="#FFBF00" cx="1586.86" gorn="0.2.2.1"  id="connector0pin_3_" cy="276.056" r="27.5" fill="none"/>
+            <circle stroke-width="20" stroke="#FFBF00" cx="1586.86" gorn="0.2.2.2"  id="connector1pin_3_" cy="376.056" r="27.5" fill="none"/>
+            <circle stroke-width="20" stroke="#FFBF00" cx="1586.86" gorn="0.2.2.3"  id="connector2pin_3_" cy="476.056" r="27.5" fill="none"/>
+            <circle stroke-width="20" stroke="#FFBF00" cx="1586.86" gorn="0.2.2.4"  id="connector3pin_3_" cy="576.07" r="27.5" fill="none"/>
+            <rect y="248.556" width="54.9999" stroke-width="20" x="1559.36" stroke="#FFBF00" height="55.0139" gorn="0.2.2.5"  id="square_2_" fill="none"/>
+            <circle stroke-width="20" stroke="#FFBF00" cx="1586.86" gorn="0.2.2.6"  id="connector16pin" cy="276.056" r="27.5" fill="none"/>
+            <circle stroke-width="20" stroke="#FFBF00" cx="1586.86" gorn="0.2.2.7"  id="connector17pin" cy="376.056" r="27.5" fill="none"/>
+            <circle stroke-width="20" stroke="#FFBF00" cx="1586.86" gorn="0.2.2.8"  id="connector18pin" cy="476.056" r="27.5" fill="none"/>
+            <circle stroke-width="20" stroke="#FFBF00" cx="1586.86" gorn="0.2.2.9"  id="connector19pin" cy="576.07" r="27.5" fill="none"/>
+        </g>
+    </g>
+</svg>
