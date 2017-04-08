@@ -64,6 +64,7 @@ class StandByMode(UIMode):
         super().__init__(ui)
 
     def enter(self):
+        self.ui.disable_monitors()
         self.ui.lcd.set_backlight(False)
         self.ui.write_centered(0, BANNER)
         self.ui.write_centered(1, time.ctime())
@@ -71,6 +72,7 @@ class StandByMode(UIMode):
     def leave(self):
         self.ui.lcd.set_backlight(True)
         self.ui.select_bank(self.ui.cur_bank_i)
+        self.ui.enable_monitors()
 
     async def run(self):
         while True:
@@ -92,6 +94,7 @@ class MenuMode(UIMode):
         self.current = 0
 
     def enter(self):
+        self.ui.disable_monitors()
         self.ui.write_centered(0, BANNER)
         self.update_menu()
 
@@ -116,7 +119,7 @@ class MenuMode(UIMode):
         return None
 
     def leave(self):
-        pass
+        self.ui.enable_monitors()
 
     async def run(self):
         while True:
@@ -287,6 +290,7 @@ class OpimidiUI(EventHandler):
         self.backend = backend
         if backend:
             backend.ui = self
+        self.monitors_enabled = False
         self.midi_monitor = MIDIMonitor(self)
         self._pressed = {}
         self.config = Config()
@@ -326,12 +330,25 @@ class OpimidiUI(EventHandler):
                 ["set_program", self.bank.name, self.program.name],
                 ])
 
+    def enable_monitors(self):
+        if self.monitors_enabled:
+            return
+        self.monitors_enabled = True
+        self.show_monitors()
+
+    def disable_monitors(self):
+        if not self.monitors_enabled:
+            return
+        self.monitors_enabled = False
+
     def show_monitors(self):
         for name in ["1", "2", "A", "B"]:
             value = self.midi_monitor.monitor_values.get(name)
             self.set_monitor(name, value)
 
     def set_monitor(self, name, value):
+        if not self.monitors_enabled:
+            return
         try:
             line, col = self.monitor_pos[name]
         except KeyError:
@@ -344,7 +361,7 @@ class OpimidiUI(EventHandler):
         self.lcd.write(line, col, char)
 
     def write_centered(self, line, text):
-        if self.midi_monitor.monitors:
+        if self.monitors_enabled:
             width = self.lcd.width - 2
             x = 1
         else:
@@ -354,7 +371,7 @@ class OpimidiUI(EventHandler):
         self.lcd.write(line, x, text)
 
     def write_three(self, line, text1, text2, text3):
-        if self.midi_monitor.monitors:
+        if self.monitors_enabled:
             width = self.lcd.width - 2
             x = 1
         else:
