@@ -1,0 +1,847 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 189.23396 170.83847"  gorn="0" version="1.1" id="svg2" width="53.406029mm" height="48.214413mm">
+    <desc >
+        <referenceFile >pcb.svg</referenceFile>
+    </desc>
+    <defs  id="defs4"/>
+    <metadata  id="metadata7">
+        <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+            <cc:Work rdf:about="" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+                <dc:format xmlns:dc="http://purl.org/dc/elements/1.1/">image/svg+xml</dc:format>
+                <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+                <dc:title xmlns:dc="http://purl.org/dc/elements/1.1/"/>
+            </cc:Work>
+        </rdf:RDF>
+    </metadata>
+    <g  transform="translate(0.1771653,-882.10327)">
+        <g >
+            <g >
+                <g >
+                    <g >
+                        <g >
+                            <g >
+                                <g >
+                                    <g >
+                                        <g style="display:inline"  gorn="0.3.0.0.0.0.0.0.0.0.0" id="layer1">
+                                            <g  gorn="0.3.0.0.0.0.0.0.0.0.0.0" id="silkscreen">
+                                                <rect y="883.42902" style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  x="15.391347" stroke="#1a1a1a" gorn="0.3.0.0.0.0.0.0.0.0.0.0.0" fill="none" id="rect3401" stroke-width="1.13204038" mask="none" width="168.9467" height="168.9467" fill-opacity="0.66666667" stroke-opacity="1"/>
+                                                <circle style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  stroke="#d4aa00" gorn="0.3.0.0.0.0.0.0.0.0.0.0.1" r="5.3033009" fill="none" id="path3425" stroke-width="1.15900004" cx="24.748737" cy="893.01062" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                <circle style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  stroke="#d4aa00" gorn="0.3.0.0.0.0.0.0.0.0.0.0.2" r="5.3033009" fill="none" id="path3425-3" stroke-width="1.15900004" cx="174.75639" cy="893.01062" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                <circle style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  stroke="#d4aa00" gorn="0.3.0.0.0.0.0.0.0.0.0.0.3" r="5.3033009" fill="none" id="path3425-6" stroke-width="1.15900004" cx="24.243658" cy="1041.7556" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                <circle style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  stroke="#d4aa00" gorn="0.3.0.0.0.0.0.0.0.0.0.0.4" r="5.3033009" fill="none" id="path3425-3-7" stroke-width="1.15900004" cx="174.25131" cy="1041.7556" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+    <g style="display:none"  gorn="0.4" id="layer2">
+        <g  transform="translate(0.1771653,-882.10327)">
+            <g >
+                <g >
+                    <g >
+                        <g >
+                            <g >
+                                <g >
+                                    <g >
+                                        <g >
+                                            <g style="display:inline"  gorn="0.4.0.0.0.0.0.0.0.0.0.0" id="copper0">
+                                                <g  gorn="0.4.0.0.0.0.0.0.0.0.0.0.0" id="copper1">
+                                                    <g  gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.0" id="g4211">
+                                                        <rect y="882.29688" style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  x="41.199287" stroke="#000000" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.0.0" fill="none" id="rect3349" stroke-width="0" width="8.9999895" height="8.9999895" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                        <circle style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  stroke="#d4aa00" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.0.1" r="2.161484" fill="none" id="path3460" stroke-width="0.99199271" cx="45.655357" cy="886.82941" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                    </g>
+                                                    <rect y="882.10327" style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  x="149.20535" stroke="#000000" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.1" fill="none" id="rect3349-6" stroke-width="0" width="8.9999895" height="8.9999895" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                    <rect y="884.57617" style="stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  x="151.47855" stroke="#d4aa00" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.2" fill="none" id="rect4244" stroke-width="0.77855527" width="4.4414449" height="4.4414449" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                    <g  transform="">
+                                                        <g  gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.3.0" id="use4246">
+                                                            <rect y="882.29688" style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  x="41.199287" stroke="#000000" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.3.0.0" fill="none" id="rect3349" stroke-width="0" width="8.9999895" height="8.9999895" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                            <circle style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  stroke="#d4aa00" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.3.0.1" r="2.161484" fill="none" id="connector24pin" stroke-width="0.99199271" cx="45.655357" cy="886.82941" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                        </g>
+                                                    </g>
+                                                    <g  transform="translate(0,8.9999995)">
+                                                        <g >
+                                                            <g >
+                                                                <g >
+                                                                    <g >
+                                                                        <g >
+                                                                            <g >
+                                                                                <g >
+                                                                                    <g >
+                                                                                        <g >
+                                                                                            <g  gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.4.0.0.0.0.0.0.0.0.0.0" id="use4248">
+                                                                                                <rect y="882.29688" style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  x="41.199287" stroke="#000000" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.4.0.0.0.0.0.0.0.0.0.0.0" fill="none" id="rect3349" stroke-width="0" width="8.9999895" height="8.9999895" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                                <circle style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  stroke="#d4aa00" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.4.0.0.0.0.0.0.0.0.0.0.1" r="2.161484" fill="none" id="connector25pin" stroke-width="0.99199271" cx="45.655357" cy="886.82941" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                            </g>
+                                                                                        </g>
+                                                                                    </g>
+                                                                                </g>
+                                                                            </g>
+                                                                        </g>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                    <g  transform="translate(8.9999995,0)">
+                                                        <g >
+                                                            <g >
+                                                                <g >
+                                                                    <g >
+                                                                        <g >
+                                                                            <g >
+                                                                                <g >
+                                                                                    <g >
+                                                                                        <g >
+                                                                                            <g  gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.5.0.0.0.0.0.0.0.0.0.0" id="use4250">
+                                                                                                <rect y="882.29688" style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  x="41.199287" stroke="#000000" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.5.0.0.0.0.0.0.0.0.0.0.0" fill="none" id="rect3349" stroke-width="0" width="8.9999895" height="8.9999895" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                                <circle style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  stroke="#d4aa00" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.5.0.0.0.0.0.0.0.0.0.0.1" r="2.161484" fill="none" id="connector22pin" stroke-width="0.99199271" cx="45.655357" cy="886.82941" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                            </g>
+                                                                                        </g>
+                                                                                    </g>
+                                                                                </g>
+                                                                            </g>
+                                                                        </g>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                    <g  transform="translate(8.9999995,8.9999995)">
+                                                        <g >
+                                                            <g >
+                                                                <g >
+                                                                    <g >
+                                                                        <g >
+                                                                            <g >
+                                                                                <g >
+                                                                                    <g >
+                                                                                        <g >
+                                                                                            <g  gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.6.0.0.0.0.0.0.0.0.0.0" id="use4252">
+                                                                                                <rect y="882.29688" style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  x="41.199287" stroke="#000000" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.6.0.0.0.0.0.0.0.0.0.0.0" fill="none" id="rect3349" stroke-width="0" width="8.9999895" height="8.9999895" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                                <circle style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  stroke="#d4aa00" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.6.0.0.0.0.0.0.0.0.0.0.1" r="2.161484" fill="none" id="connector23pin" stroke-width="0.99199271" cx="45.655357" cy="886.82941" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                            </g>
+                                                                                        </g>
+                                                                                    </g>
+                                                                                </g>
+                                                                            </g>
+                                                                        </g>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                    <g  transform="translate(17.999999,0)">
+                                                        <g >
+                                                            <g >
+                                                                <g >
+                                                                    <g >
+                                                                        <g >
+                                                                            <g >
+                                                                                <g >
+                                                                                    <g >
+                                                                                        <g >
+                                                                                            <g  gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.7.0.0.0.0.0.0.0.0.0.0" id="use4254">
+                                                                                                <rect y="882.29688" style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  x="41.199287" stroke="#000000" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.7.0.0.0.0.0.0.0.0.0.0.0" fill="none" id="rect3349" stroke-width="0" width="8.9999895" height="8.9999895" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                                <circle style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  stroke="#d4aa00" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.7.0.0.0.0.0.0.0.0.0.0.1" r="2.161484" fill="none" id="connector20pin" stroke-width="0.99199271" cx="45.655357" cy="886.82941" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                            </g>
+                                                                                        </g>
+                                                                                    </g>
+                                                                                </g>
+                                                                            </g>
+                                                                        </g>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                    <g  transform="translate(17.999999,8.9999995)">
+                                                        <g >
+                                                            <g >
+                                                                <g >
+                                                                    <g >
+                                                                        <g >
+                                                                            <g >
+                                                                                <g >
+                                                                                    <g >
+                                                                                        <g >
+                                                                                            <g  gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.8.0.0.0.0.0.0.0.0.0.0" id="use4256">
+                                                                                                <rect y="882.29688" style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  x="41.199287" stroke="#000000" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.8.0.0.0.0.0.0.0.0.0.0.0" fill="none" id="rect3349" stroke-width="0" width="8.9999895" height="8.9999895" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                                <circle style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  stroke="#d4aa00" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.8.0.0.0.0.0.0.0.0.0.0.1" r="2.161484" fill="none" id="connector21pin" stroke-width="0.99199271" cx="45.655357" cy="886.82941" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                            </g>
+                                                                                        </g>
+                                                                                    </g>
+                                                                                </g>
+                                                                            </g>
+                                                                        </g>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                    <g  transform="translate(26.999999,0)">
+                                                        <g >
+                                                            <g >
+                                                                <g >
+                                                                    <g >
+                                                                        <g >
+                                                                            <g >
+                                                                                <g >
+                                                                                    <g >
+                                                                                        <g >
+                                                                                            <g  gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.9.0.0.0.0.0.0.0.0.0.0" id="use4258">
+                                                                                                <rect y="882.29688" style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  x="41.199287" stroke="#000000" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.9.0.0.0.0.0.0.0.0.0.0.0" fill="none" id="rect3349" stroke-width="0" width="8.9999895" height="8.9999895" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                                <circle style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  stroke="#d4aa00" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.9.0.0.0.0.0.0.0.0.0.0.1" r="2.161484" fill="none" id="connector18pin" stroke-width="0.99199271" cx="45.655357" cy="886.82941" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                            </g>
+                                                                                        </g>
+                                                                                    </g>
+                                                                                </g>
+                                                                            </g>
+                                                                        </g>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                    <g  transform="translate(26.999999,8.9999995)">
+                                                        <g >
+                                                            <g >
+                                                                <g >
+                                                                    <g >
+                                                                        <g >
+                                                                            <g >
+                                                                                <g >
+                                                                                    <g >
+                                                                                        <g >
+                                                                                            <g  gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.10.0.0.0.0.0.0.0.0.0.0" id="use4260">
+                                                                                                <rect y="882.29688" style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  x="41.199287" stroke="#000000" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.10.0.0.0.0.0.0.0.0.0.0.0" fill="none" id="rect3349" stroke-width="0" width="8.9999895" height="8.9999895" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                                <circle style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  stroke="#d4aa00" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.10.0.0.0.0.0.0.0.0.0.0.1" r="2.161484" fill="none" id="connector19pin" stroke-width="0.99199271" cx="45.655357" cy="886.82941" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                            </g>
+                                                                                        </g>
+                                                                                    </g>
+                                                                                </g>
+                                                                            </g>
+                                                                        </g>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                    <g  transform="translate(35.999998,0)">
+                                                        <g >
+                                                            <g >
+                                                                <g >
+                                                                    <g >
+                                                                        <g >
+                                                                            <g >
+                                                                                <g >
+                                                                                    <g >
+                                                                                        <g >
+                                                                                            <g  gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.11.0.0.0.0.0.0.0.0.0.0" id="use4262">
+                                                                                                <rect y="882.29688" style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  x="41.199287" stroke="#000000" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.11.0.0.0.0.0.0.0.0.0.0.0" fill="none" id="rect3349" stroke-width="0" width="8.9999895" height="8.9999895" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                                <circle style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  stroke="#d4aa00" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.11.0.0.0.0.0.0.0.0.0.0.1" r="2.161484" fill="none" id="connector16pin" stroke-width="0.99199271" cx="45.655357" cy="886.82941" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                            </g>
+                                                                                        </g>
+                                                                                    </g>
+                                                                                </g>
+                                                                            </g>
+                                                                        </g>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                    <g  transform="translate(35.999998,8.9999995)">
+                                                        <g >
+                                                            <g >
+                                                                <g >
+                                                                    <g >
+                                                                        <g >
+                                                                            <g >
+                                                                                <g >
+                                                                                    <g >
+                                                                                        <g >
+                                                                                            <g  gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.12.0.0.0.0.0.0.0.0.0.0" id="use4264">
+                                                                                                <rect y="882.29688" style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  x="41.199287" stroke="#000000" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.12.0.0.0.0.0.0.0.0.0.0.0" fill="none" id="rect3349" stroke-width="0" width="8.9999895" height="8.9999895" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                                <circle style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  stroke="#d4aa00" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.12.0.0.0.0.0.0.0.0.0.0.1" r="2.161484" fill="none" id="connector17pin" stroke-width="0.99199271" cx="45.655357" cy="886.82941" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                            </g>
+                                                                                        </g>
+                                                                                    </g>
+                                                                                </g>
+                                                                            </g>
+                                                                        </g>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                    <g  transform="translate(44.999998,0)">
+                                                        <g >
+                                                            <g >
+                                                                <g >
+                                                                    <g >
+                                                                        <g >
+                                                                            <g >
+                                                                                <g >
+                                                                                    <g >
+                                                                                        <g >
+                                                                                            <g  gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.13.0.0.0.0.0.0.0.0.0.0" id="use4266">
+                                                                                                <rect y="882.29688" style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  x="41.199287" stroke="#000000" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.13.0.0.0.0.0.0.0.0.0.0.0" fill="none" id="rect3349" stroke-width="0" width="8.9999895" height="8.9999895" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                                <circle style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  stroke="#d4aa00" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.13.0.0.0.0.0.0.0.0.0.0.1" r="2.161484" fill="none" id="connector14pin" stroke-width="0.99199271" cx="45.655357" cy="886.82941" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                            </g>
+                                                                                        </g>
+                                                                                    </g>
+                                                                                </g>
+                                                                            </g>
+                                                                        </g>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                    <g  transform="translate(44.999998,8.9999995)">
+                                                        <g >
+                                                            <g >
+                                                                <g >
+                                                                    <g >
+                                                                        <g >
+                                                                            <g >
+                                                                                <g >
+                                                                                    <g >
+                                                                                        <g >
+                                                                                            <g  gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.14.0.0.0.0.0.0.0.0.0.0" id="use4268">
+                                                                                                <rect y="882.29688" style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  x="41.199287" stroke="#000000" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.14.0.0.0.0.0.0.0.0.0.0.0" fill="none" id="rect3349" stroke-width="0" width="8.9999895" height="8.9999895" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                                <circle style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  stroke="#d4aa00" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.14.0.0.0.0.0.0.0.0.0.0.1" r="2.161484" fill="none" id="connector15pin" stroke-width="0.99199271" cx="45.655357" cy="886.82941" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                            </g>
+                                                                                        </g>
+                                                                                    </g>
+                                                                                </g>
+                                                                            </g>
+                                                                        </g>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                    <g  transform="translate(53.999997,0)">
+                                                        <g >
+                                                            <g >
+                                                                <g >
+                                                                    <g >
+                                                                        <g >
+                                                                            <g >
+                                                                                <g >
+                                                                                    <g >
+                                                                                        <g >
+                                                                                            <g  gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.15.0.0.0.0.0.0.0.0.0.0" id="use4270">
+                                                                                                <rect y="882.29688" style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  x="41.199287" stroke="#000000" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.15.0.0.0.0.0.0.0.0.0.0.0" fill="none" id="rect3349" stroke-width="0" width="8.9999895" height="8.9999895" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                                <circle style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  stroke="#d4aa00" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.15.0.0.0.0.0.0.0.0.0.0.1" r="2.161484" fill="none" id="connector12pin" stroke-width="0.99199271" cx="45.655357" cy="886.82941" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                            </g>
+                                                                                        </g>
+                                                                                    </g>
+                                                                                </g>
+                                                                            </g>
+                                                                        </g>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                    <g  transform="translate(53.999997,8.9999995)">
+                                                        <g >
+                                                            <g >
+                                                                <g >
+                                                                    <g >
+                                                                        <g >
+                                                                            <g >
+                                                                                <g >
+                                                                                    <g >
+                                                                                        <g >
+                                                                                            <g  gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.16.0.0.0.0.0.0.0.0.0.0" id="use4272">
+                                                                                                <rect y="882.29688" style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  x="41.199287" stroke="#000000" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.16.0.0.0.0.0.0.0.0.0.0.0" fill="none" id="rect3349" stroke-width="0" width="8.9999895" height="8.9999895" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                                <circle style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  stroke="#d4aa00" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.16.0.0.0.0.0.0.0.0.0.0.1" r="2.161484" fill="none" id="connector13pin" stroke-width="0.99199271" cx="45.655357" cy="886.82941" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                            </g>
+                                                                                        </g>
+                                                                                    </g>
+                                                                                </g>
+                                                                            </g>
+                                                                        </g>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                    <g  transform="translate(62.999997,0)">
+                                                        <g >
+                                                            <g >
+                                                                <g >
+                                                                    <g >
+                                                                        <g >
+                                                                            <g >
+                                                                                <g >
+                                                                                    <g >
+                                                                                        <g >
+                                                                                            <g  gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.17.0.0.0.0.0.0.0.0.0.0" id="use4274">
+                                                                                                <rect y="882.29688" style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  x="41.199287" stroke="#000000" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.17.0.0.0.0.0.0.0.0.0.0.0" fill="none" id="rect3349" stroke-width="0" width="8.9999895" height="8.9999895" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                                <circle style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  stroke="#d4aa00" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.17.0.0.0.0.0.0.0.0.0.0.1" r="2.161484" fill="none" id="connector10pin" stroke-width="0.99199271" cx="45.655357" cy="886.82941" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                            </g>
+                                                                                        </g>
+                                                                                    </g>
+                                                                                </g>
+                                                                            </g>
+                                                                        </g>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                    <g  transform="translate(62.999997,8.9999995)">
+                                                        <g >
+                                                            <g >
+                                                                <g >
+                                                                    <g >
+                                                                        <g >
+                                                                            <g >
+                                                                                <g >
+                                                                                    <g >
+                                                                                        <g >
+                                                                                            <g  gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.18.0.0.0.0.0.0.0.0.0.0" id="use4276">
+                                                                                                <rect y="882.29688" style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  x="41.199287" stroke="#000000" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.18.0.0.0.0.0.0.0.0.0.0.0" fill="none" id="rect3349" stroke-width="0" width="8.9999895" height="8.9999895" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                                <circle style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  stroke="#d4aa00" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.18.0.0.0.0.0.0.0.0.0.0.1" r="2.161484" fill="none" id="connector11pin" stroke-width="0.99199271" cx="45.655357" cy="886.82941" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                            </g>
+                                                                                        </g>
+                                                                                    </g>
+                                                                                </g>
+                                                                            </g>
+                                                                        </g>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                    <g  transform="translate(71.999996,0)">
+                                                        <g >
+                                                            <g >
+                                                                <g >
+                                                                    <g >
+                                                                        <g >
+                                                                            <g >
+                                                                                <g >
+                                                                                    <g >
+                                                                                        <g >
+                                                                                            <g  gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.19.0.0.0.0.0.0.0.0.0.0" id="use4278">
+                                                                                                <rect y="882.29688" style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  x="41.199287" stroke="#000000" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.19.0.0.0.0.0.0.0.0.0.0.0" fill="none" id="rect3349" stroke-width="0" width="8.9999895" height="8.9999895" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                                <circle style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  stroke="#d4aa00" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.19.0.0.0.0.0.0.0.0.0.0.1" r="2.161484" fill="none" id="connector8pin" stroke-width="0.99199271" cx="45.655357" cy="886.82941" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                            </g>
+                                                                                        </g>
+                                                                                    </g>
+                                                                                </g>
+                                                                            </g>
+                                                                        </g>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                    <g  transform="translate(71.999996,8.9999995)">
+                                                        <g >
+                                                            <g >
+                                                                <g >
+                                                                    <g >
+                                                                        <g >
+                                                                            <g >
+                                                                                <g >
+                                                                                    <g >
+                                                                                        <g >
+                                                                                            <g  gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.20.0.0.0.0.0.0.0.0.0.0" id="use4280">
+                                                                                                <rect y="882.29688" style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  x="41.199287" stroke="#000000" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.20.0.0.0.0.0.0.0.0.0.0.0" fill="none" id="rect3349" stroke-width="0" width="8.9999895" height="8.9999895" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                                <circle style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  stroke="#d4aa00" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.20.0.0.0.0.0.0.0.0.0.0.1" r="2.161484" fill="none" id="connector9pin" stroke-width="0.99199271" cx="45.655357" cy="886.82941" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                            </g>
+                                                                                        </g>
+                                                                                    </g>
+                                                                                </g>
+                                                                            </g>
+                                                                        </g>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                    <g  transform="translate(80.999996,0)">
+                                                        <g >
+                                                            <g >
+                                                                <g >
+                                                                    <g >
+                                                                        <g >
+                                                                            <g >
+                                                                                <g >
+                                                                                    <g >
+                                                                                        <g >
+                                                                                            <g  gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.21.0.0.0.0.0.0.0.0.0.0" id="use4282">
+                                                                                                <rect y="882.29688" style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  x="41.199287" stroke="#000000" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.21.0.0.0.0.0.0.0.0.0.0.0" fill="none" id="rect3349" stroke-width="0" width="8.9999895" height="8.9999895" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                                <circle style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  stroke="#d4aa00" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.21.0.0.0.0.0.0.0.0.0.0.1" r="2.161484" fill="none" id="connector6pin" stroke-width="0.99199271" cx="45.655357" cy="886.82941" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                            </g>
+                                                                                        </g>
+                                                                                    </g>
+                                                                                </g>
+                                                                            </g>
+                                                                        </g>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                    <g  transform="translate(80.999996,8.9999995)">
+                                                        <g >
+                                                            <g >
+                                                                <g >
+                                                                    <g >
+                                                                        <g >
+                                                                            <g >
+                                                                                <g >
+                                                                                    <g >
+                                                                                        <g >
+                                                                                            <g  gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.22.0.0.0.0.0.0.0.0.0.0" id="use4284">
+                                                                                                <rect y="882.29688" style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  x="41.199287" stroke="#000000" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.22.0.0.0.0.0.0.0.0.0.0.0" fill="none" id="rect3349" stroke-width="0" width="8.9999895" height="8.9999895" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                                <circle style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  stroke="#d4aa00" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.22.0.0.0.0.0.0.0.0.0.0.1" r="2.161484" fill="none" id="connector7pin" stroke-width="0.99199271" cx="45.655357" cy="886.82941" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                            </g>
+                                                                                        </g>
+                                                                                    </g>
+                                                                                </g>
+                                                                            </g>
+                                                                        </g>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                    <g  transform="translate(89.999995,0)">
+                                                        <g >
+                                                            <g >
+                                                                <g >
+                                                                    <g >
+                                                                        <g >
+                                                                            <g >
+                                                                                <g >
+                                                                                    <g >
+                                                                                        <g >
+                                                                                            <g  gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.23.0.0.0.0.0.0.0.0.0.0" id="use4286">
+                                                                                                <rect y="882.29688" style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  x="41.199287" stroke="#000000" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.23.0.0.0.0.0.0.0.0.0.0.0" fill="none" id="rect3349" stroke-width="0" width="8.9999895" height="8.9999895" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                                <circle style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  stroke="#d4aa00" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.23.0.0.0.0.0.0.0.0.0.0.1" r="2.161484" fill="none" id="connector4pin" stroke-width="0.99199271" cx="45.655357" cy="886.82941" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                            </g>
+                                                                                        </g>
+                                                                                    </g>
+                                                                                </g>
+                                                                            </g>
+                                                                        </g>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                    <g  transform="translate(89.999995,8.9999995)">
+                                                        <g >
+                                                            <g >
+                                                                <g >
+                                                                    <g >
+                                                                        <g >
+                                                                            <g >
+                                                                                <g >
+                                                                                    <g >
+                                                                                        <g >
+                                                                                            <g  gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.24.0.0.0.0.0.0.0.0.0.0" id="use4288">
+                                                                                                <rect y="882.29688" style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  x="41.199287" stroke="#000000" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.24.0.0.0.0.0.0.0.0.0.0.0" fill="none" id="rect3349" stroke-width="0" width="8.9999895" height="8.9999895" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                                <circle style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  stroke="#d4aa00" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.24.0.0.0.0.0.0.0.0.0.0.1" r="2.161484" fill="none" id="connector5pin" stroke-width="0.99199271" cx="45.655357" cy="886.82941" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                            </g>
+                                                                                        </g>
+                                                                                    </g>
+                                                                                </g>
+                                                                            </g>
+                                                                        </g>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                    <g  transform="translate(98.999995,0)">
+                                                        <g >
+                                                            <g >
+                                                                <g >
+                                                                    <g >
+                                                                        <g >
+                                                                            <g >
+                                                                                <g >
+                                                                                    <g >
+                                                                                        <g >
+                                                                                            <g  gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.25.0.0.0.0.0.0.0.0.0.0" id="use4290">
+                                                                                                <rect y="882.29688" style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  x="41.199287" stroke="#000000" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.25.0.0.0.0.0.0.0.0.0.0.0" fill="none" id="rect3349" stroke-width="0" width="8.9999895" height="8.9999895" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                                <circle style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  stroke="#d4aa00" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.25.0.0.0.0.0.0.0.0.0.0.1" r="2.161484" fill="none" id="connector2pin" stroke-width="0.99199271" cx="45.655357" cy="886.82941" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                            </g>
+                                                                                        </g>
+                                                                                    </g>
+                                                                                </g>
+                                                                            </g>
+                                                                        </g>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                    <g  transform="translate(98.999995,8.9999995)">
+                                                        <g >
+                                                            <g >
+                                                                <g >
+                                                                    <g >
+                                                                        <g >
+                                                                            <g >
+                                                                                <g >
+                                                                                    <g >
+                                                                                        <g >
+                                                                                            <g  gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.26.0.0.0.0.0.0.0.0.0.0" id="use4292">
+                                                                                                <rect y="882.29688" style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  x="41.199287" stroke="#000000" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.26.0.0.0.0.0.0.0.0.0.0.0" fill="none" id="rect3349" stroke-width="0" width="8.9999895" height="8.9999895" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                                <circle style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  stroke="#d4aa00" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.26.0.0.0.0.0.0.0.0.0.0.1" r="2.161484" fill="none" id="connector3pin" stroke-width="0.99199271" cx="45.655357" cy="886.82941" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                            </g>
+                                                                                        </g>
+                                                                                    </g>
+                                                                                </g>
+                                                                            </g>
+                                                                        </g>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                    <g  transform="translate(107.99999,0)">
+                                                        <g >
+                                                            <g >
+                                                                <g >
+                                                                    <g >
+                                                                        <g >
+                                                                            <g >
+                                                                                <g >
+                                                                                    <g >
+                                                                                        <g >
+                                                                                            <g  gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.27.0.0.0.0.0.0.0.0.0.0" id="use4294">
+                                                                                                <rect y="882.29688" style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  x="41.199287" stroke="#000000" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.27.0.0.0.0.0.0.0.0.0.0.0" fill="none" id="rect3349" stroke-width="0" width="8.9999895" height="8.9999895" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                                <circle style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  stroke="#d4aa00" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.27.0.0.0.0.0.0.0.0.0.0.1" r="2.161484" fill="none" id="connector0pin" stroke-width="0.99199271" cx="45.655357" cy="886.82941" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                            </g>
+                                                                                        </g>
+                                                                                    </g>
+                                                                                </g>
+                                                                            </g>
+                                                                        </g>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                    <g  transform="translate(107.99999,8.9999995)">
+                                                        <g >
+                                                            <g >
+                                                                <g >
+                                                                    <g >
+                                                                        <g >
+                                                                            <g >
+                                                                                <g >
+                                                                                    <g >
+                                                                                        <g >
+                                                                                            <g  gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.28.0.0.0.0.0.0.0.0.0.0" id="use4296">
+                                                                                                <rect y="882.29688" style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  x="41.199287" stroke="#000000" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.28.0.0.0.0.0.0.0.0.0.0.0" fill="none" id="rect3349" stroke-width="0" width="8.9999895" height="8.9999895" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                                <circle style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  stroke="#d4aa00" gorn="0.4.0.0.0.0.0.0.0.0.0.0.0.28.0.0.0.0.0.0.0.0.0.0.1" r="2.161484" fill="none" id="connector1pin" stroke-width="0.99199271" cx="45.655357" cy="886.82941" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                            </g>
+                                                                                        </g>
+                                                                                    </g>
+                                                                                </g>
+                                                                            </g>
+                                                                        </g>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+    <g style="display:none"  gorn="0.5" id="layer3">
+        <g  gorn="0.5.0" id="xxx">
+            <g  transform="translate(9.7736145,-880.90371)">
+                <g >
+                    <g >
+                        <g >
+                            <g >
+                                <g >
+                                    <g >
+                                        <g >
+                                            <g >
+                                                <g style="display:inline"  gorn="0.5.0.0.0.0.0.0.0.0.0.0.0" id="g4361">
+                                                    <g  transform="scale(-1,1)">
+                                                        <g >
+                                                            <g >
+                                                                <g >
+                                                                    <g >
+                                                                        <g >
+                                                                            <g >
+                                                                                <g >
+                                                                                    <g >
+                                                                                        <rect y="911.15826" style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  x="-14.068388" stroke="#000000" gorn="0.5.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0" fill="none" id="rect3349-6-2" stroke-width="0" width="8.9999895" height="8.9999895" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                    </g>
+                                                                                </g>
+                                                                            </g>
+                                                                        </g>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                    <g  transform="scale(-1,1)">
+                                                        <g >
+                                                            <g >
+                                                                <g >
+                                                                    <g >
+                                                                        <g >
+                                                                            <g >
+                                                                                <g >
+                                                                                    <g >
+                                                                                        <rect y="913.63116" style="stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  x="-11.795195" stroke="#d4aa00" gorn="0.5.0.0.0.0.0.0.0.0.0.0.0.1.0.0.0.0.0.0.0.0.0" fill="none" id="rect4244-9" stroke-width="0.77855527" width="4.4414449" height="4.4414449" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                    </g>
+                                                                                </g>
+                                                                            </g>
+                                                                        </g>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                    <g  transform="matrix(-1,0,0,1,73.273746,29.054991)">
+                                                        <g >
+                                                            <g >
+                                                                <g >
+                                                                    <g >
+                                                                        <g >
+                                                                            <g >
+                                                                                <g >
+                                                                                    <g >
+                                                                                        <g >
+                                                                                            <g  gorn="0.5.0.0.0.0.0.0.0.0.0.0.0.2.0.0.0.0.0.0.0.0.0.0" id="use4286-1">
+                                                                                                <rect y="882.29688" style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  x="41.199287" stroke="#000000" gorn="0.5.0.0.0.0.0.0.0.0.0.0.0.2.0.0.0.0.0.0.0.0.0.0.0" fill="none" id="rect3349" stroke-width="0" width="8.9999895" height="8.9999895" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                                <circle style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  stroke="#d4aa00" gorn="0.5.0.0.0.0.0.0.0.0.0.0.0.2.0.0.0.0.0.0.0.0.0.0.1" r="2.161484" fill="none" id="connector41pin" stroke-width="0.99199271" cx="45.655357" cy="886.82941" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                            </g>
+                                                                                        </g>
+                                                                                    </g>
+                                                                                </g>
+                                                                            </g>
+                                                                        </g>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                    <g  transform="matrix(-1,0,0,1,64.273746,29.054991)">
+                                                        <g >
+                                                            <g >
+                                                                <g >
+                                                                    <g >
+                                                                        <g >
+                                                                            <g >
+                                                                                <g >
+                                                                                    <g >
+                                                                                        <g >
+                                                                                            <g  gorn="0.5.0.0.0.0.0.0.0.0.0.0.0.3.0.0.0.0.0.0.0.0.0.0" id="use4290-2">
+                                                                                                <rect y="882.29688" style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  x="41.199287" stroke="#000000" gorn="0.5.0.0.0.0.0.0.0.0.0.0.0.3.0.0.0.0.0.0.0.0.0.0.0" fill="none" id="rect3349" stroke-width="0" width="8.9999895" height="8.9999895" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                                <circle style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  stroke="#d4aa00" gorn="0.5.0.0.0.0.0.0.0.0.0.0.0.3.0.0.0.0.0.0.0.0.0.0.1" r="2.161484" fill="none" id="connector40pin" stroke-width="0.99199271" cx="45.655357" cy="886.82941" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                            </g>
+                                                                                        </g>
+                                                                                    </g>
+                                                                                </g>
+                                                                            </g>
+                                                                        </g>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                    <g  transform="matrix(-1,0,0,1,55.273751,29.054991)">
+                                                        <g >
+                                                            <g >
+                                                                <g >
+                                                                    <g >
+                                                                        <g >
+                                                                            <g >
+                                                                                <g >
+                                                                                    <g >
+                                                                                        <g >
+                                                                                            <g  gorn="0.5.0.0.0.0.0.0.0.0.0.0.0.4.0.0.0.0.0.0.0.0.0.0" id="use4294-7">
+                                                                                                <rect y="882.29688" style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  x="41.199287" stroke="#000000" gorn="0.5.0.0.0.0.0.0.0.0.0.0.0.4.0.0.0.0.0.0.0.0.0.0.0" fill="none" id="rect3349" stroke-width="0" width="8.9999895" height="8.9999895" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                                <circle style="stroke-linecap:butt;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  stroke="#d4aa00" gorn="0.5.0.0.0.0.0.0.0.0.0.0.0.4.0.0.0.0.0.0.0.0.0.0.1" r="2.161484" fill="none" id="connector39pin" stroke-width="0.99199271" cx="45.655357" cy="886.82941" fill-opacity="0.50196078" stroke-opacity="1"/>
+                                                                                            </g>
+                                                                                        </g>
+                                                                                    </g>
+                                                                                </g>
+                                                                            </g>
+                                                                        </g>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+            <g  transform="translate(-0.07537283,-882.35581)">
+                <g >
+                    <g >
+                        <g >
+                            <g >
+                                <g >
+                                    <g >
+                                        <g >
+                                            <g >
+                                                <g style="display:inline"  gorn="0.5.0.1.0.0.0.0.0.0.0.0.0" id="g4822">
+                                                    <rect y="1044.3242" style="stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  x="42.869438" stroke="#000000" gorn="0.5.0.1.0.0.0.0.0.0.0.0.0.0" fill="#d4e220" id="connector26pin" stroke-width="3.17272568" width="5.8272743" height="5.8272743" fill-opacity="1" stroke-opacity="1"/>
+                                                    <rect y="1044.3242" style="stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  x="51.869438" stroke="#000000" gorn="0.5.0.1.0.0.0.0.0.0.0.0.0.1" fill="#d4e220" id="connector27pin" stroke-width="3.17272568" width="5.8272743" height="5.8272743" fill-opacity="1" stroke-opacity="1"/>
+                                                    <rect y="1044.3242" style="stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  x="60.869438" stroke="#000000" gorn="0.5.0.1.0.0.0.0.0.0.0.0.0.2" fill="#d4e220" id="connector28pin" stroke-width="3.17272568" width="5.8272743" height="5.8272743" fill-opacity="1" stroke-opacity="1"/>
+                                                    <rect y="1044.3242" style="stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  x="69.869438" stroke="#000000" gorn="0.5.0.1.0.0.0.0.0.0.0.0.0.3" fill="#d4e220" id="connector29pin" stroke-width="3.17272568" width="5.8272743" height="5.8272743" fill-opacity="1" stroke-opacity="1"/>
+                                                    <rect y="1044.3242" style="stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  x="78.869438" stroke="#000000" gorn="0.5.0.1.0.0.0.0.0.0.0.0.0.4" fill="#d4e220" id="connector30pin" stroke-width="3.17272568" width="5.8272743" height="5.8272743" fill-opacity="1" stroke-opacity="1"/>
+                                                    <rect y="1044.3242" style="stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  x="87.869438" stroke="#000000" gorn="0.5.0.1.0.0.0.0.0.0.0.0.0.5" fill="#d4e220" id="connector31pin" stroke-width="3.17272568" width="5.8272743" height="5.8272743" fill-opacity="1" stroke-opacity="1"/>
+                                                    <rect y="1044.3242" style="stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  x="96.869438" stroke="#000000" gorn="0.5.0.1.0.0.0.0.0.0.0.0.0.6" fill="#d4e220" id="connector32pin" stroke-width="3.17272568" width="5.8272743" height="5.8272743" fill-opacity="1" stroke-opacity="1"/>
+                                                    <rect y="1044.3242" style="stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  x="105.86944" stroke="#000000" gorn="0.5.0.1.0.0.0.0.0.0.0.0.0.7" fill="#d4e220" id="connector33pin" stroke-width="3.17272568" width="5.8272743" height="5.8272743" fill-opacity="1" stroke-opacity="1"/>
+                                                    <rect y="1044.3242" style="stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  x="114.86944" stroke="#000000" gorn="0.5.0.1.0.0.0.0.0.0.0.0.0.8" fill="#d4e220" id="connector34pin" stroke-width="3.17272568" width="5.8272743" height="5.8272743" fill-opacity="1" stroke-opacity="1"/>
+                                                    <rect y="1044.3242" style="stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  x="123.86944" stroke="#000000" gorn="0.5.0.1.0.0.0.0.0.0.0.0.0.9" fill="#d4e220" id="connector35pin" stroke-width="3.17272568" width="5.8272743" height="5.8272743" fill-opacity="1" stroke-opacity="1"/>
+                                                    <rect y="1044.3242" style="stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  x="132.86945" stroke="#000000" gorn="0.5.0.1.0.0.0.0.0.0.0.0.0.10" fill="#d4e220" id="connector36pin" stroke-width="3.17272568" width="5.8272743" height="5.8272743" fill-opacity="1" stroke-opacity="1"/>
+                                                    <rect y="1044.3242" style="stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  x="141.86945" stroke="#000000" gorn="0.5.0.1.0.0.0.0.0.0.0.0.0.11" fill="#d4e220" id="connector37pin" stroke-width="3.17272568" width="5.8272743" height="5.8272743" fill-opacity="1" stroke-opacity="1"/>
+                                                    <rect y="1044.3242" style="stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-dashoffset:0;"  x="150.86945" stroke="#000000" gorn="0.5.0.1.0.0.0.0.0.0.0.0.0.12" fill="#d4e220" id="connector38pin" stroke-width="3.17272568" width="5.8272743" height="5.8272743" fill-opacity="1" stroke-opacity="1"/>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

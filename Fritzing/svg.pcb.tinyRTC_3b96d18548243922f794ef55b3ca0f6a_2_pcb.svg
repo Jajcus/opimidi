@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<!-- Created with Fritzing (http://www.fritzing.org/) -->
+<svg xmlns="http://www.w3.org/2000/svg" x="0in" gorn="0" viewBox="0 0 72 48.599996" id="svg2" height="60.75" version="1.2" y="0in"  width="90">
+    <desc >
+        <referenceFile >mine_pcb.svg</referenceFile>
+    </desc>
+    <metadata id="metadata200" >
+        <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+            <cc:Work rdf:about="" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+                <dc:format xmlns:dc="http://purl.org/dc/elements/1.1/">image/svg+xml</dc:format>
+                <dc:type xmlns:dc="http://purl.org/dc/elements/1.1/" rdf:resource="http://purl.org/dc/dcmitype/StillImage" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+                <dc:title xmlns:dc="http://purl.org/dc/elements/1.1/"/>
+            </cc:Work>
+        </rdf:RDF>
+    </metadata>
+    <defs id="defs198" />
+    <g gorn="0.3" id="copper1" >
+        <path style="stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;display:inline" gorn="0.3.0" stroke="#ffbf00" stroke-width="1.79999995" d="m 2.7,40.499998 a 1.8,1.8 0 1 1 0,-3.6 1.8,1.8 0 0 1 0,3.6 z" id="connector4pin" stroke-opacity="1" fill="none" />
+        <path style="stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;display:inline" gorn="0.3.1" stroke="#ffbf00" stroke-width="1.79999995" d="m 2.7,33.299998 a 1.8,1.8 0 1 1 0,-3.6 1.8,1.8 0 0 1 0,3.6 z" id="connector3pin" stroke-opacity="1" fill="none" />
+        <path style="stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;display:inline" gorn="0.3.2" stroke="#ffbf00" stroke-width="1.79999995" d="m 2.7,26.099998 a 1.8,1.8 0 1 1 0,-3.6 1.8,1.8 0 0 1 0,3.6 z" id="connector2pin" stroke-opacity="1" fill="none" />
+        <path style="stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;display:inline" gorn="0.3.3" stroke="#ffbf00" stroke-width="1.79999995" d="m 2.7,18.899998 a 1.8,1.8 0 1 1 0,-3.6 1.8,1.8 0 0 1 0,3.6 z" id="connector1pin" stroke-opacity="1" fill="none" />
+        <path style="stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;display:inline" gorn="0.3.4" stroke="#ffbf00" stroke-width="1.79999995" d="m 2.7,11.699998 a 1.8,1.8 0 1 1 0,-3.5999998 1.8,1.8 0 0 1 0,3.5999998 z" id="connector0pin" stroke-opacity="1" fill="none" />
+        <path style="stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;display:inline" gorn="0.3.5" stroke="#ffbf00" stroke-width="1.79999995" d="m 69.299998,47.699998 a 1.8,1.8 0 1 1 0,-3.6 1.8,1.8 0 0 1 0,3.6 z" id="connector11pin" stroke-opacity="1" fill="none" />
+        <path style="stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;display:inline" gorn="0.3.6" stroke="#ffbf00" stroke-width="1.79999995" d="m 69.299998,40.499998 a 1.8,1.8 0 1 1 0,-3.6 1.8,1.8 0 0 1 0,3.6 z" id="connector10pin" stroke-opacity="1" fill="none" />
+        <path style="stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;display:inline" gorn="0.3.7" stroke="#ffbf00" stroke-width="1.79999995" d="m 69.299998,33.299998 a 1.8,1.8 0 1 1 0,-3.6 1.8,1.8 0 0 1 0,3.6 z" id="connector9pin" stroke-opacity="1" fill="none" />
+        <path style="stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;display:inline" gorn="0.3.8" stroke="#ffbf00" stroke-width="1.79999995" d="m 69.299998,26.099998 a 1.8,1.8 0 1 1 0,-3.6 1.8,1.8 0 0 1 0,3.6 z" id="connector8pin" stroke-opacity="1" fill="none" />
+        <path style="stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;display:inline" gorn="0.3.9" stroke="#ffbf00" stroke-width="1.79999995" d="m 69.299998,18.899998 a 1.8,1.8 0 1 1 0,-3.6 1.8,1.8 0 0 1 0,3.6 z" id="connector7pin" stroke-opacity="1" fill="none" />
+        <path style="stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;display:inline" gorn="0.3.10" stroke="#ffbf00" stroke-width="1.79999995" d="m 69.299998,11.699998 a 1.8,1.8 0 1 1 0,-3.5999998 1.8,1.8 0 0 1 0,3.5999998 z" id="connector6pin" stroke-opacity="1" fill="none" />
+        <path style="stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;display:inline" gorn="0.3.11" stroke="#ffbf00" stroke-width="1.79999995" d="m 69.299998,4.4999982 a 1.8,1.8 0 1 1 0,-3.59999998 1.8,1.8 0 0 1 0,3.59999998 z" id="connector5pin" stroke-opacity="1" fill="none" />
+    </g>
+</svg>

@@ -4,6 +4,8 @@
 *.pyc
 *.so
 *~
+*.bak
+*.fzz
 /build
 /dist
 /scripts/opimidi
